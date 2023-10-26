@@ -1,3 +1,7 @@
+### дизайн в figma:
+https://www.figma.com/file/SR5uebjW4Z4cCx1NIdYGFy/Messenger-project?type=design&node-id=0%3A1&mode=design&t=jovtXwYcgSm0loO4-1
+
+____________________________________
 ### Ветка, в которой делаете задания спринта, должна называться sprint_i, где i - номер спринта. Не переименовывайте её.
 
 ### Откройте pull request в ветку main из ветки, где вы разрабатывали проект, и добавьте ссылку на этот pr в README.md в ветке main. 

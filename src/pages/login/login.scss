@@ -1,0 +1,32 @@
+.card {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    gap: 1rem;
+    width: 20vw;
+
+    padding: 40px;
+
+    border: 1px solid #a9a6a6;
+    border-radius: 4px;
+}
+.card input[type=button] {
+    font-weight: bold;
+    margin-top: 2rem;
+    background-color:#176909;
+    border: none;
+    color: white;
+    cursor: pointer;
+    padding: 6px 8px;
+    height: 30px;
+    width: 190px;
+    text-decoration: none;
+    border-radius: 4px;
+}
+.card .input-box {
+    position: relative
+}
+.window a {
+    text-decoration: none !important;
+    color:#176909;
+}

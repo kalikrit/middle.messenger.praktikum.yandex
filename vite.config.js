@@ -14,12 +14,14 @@ export default defineConfig({
         index: resolve(__dirname, 'index.html'),
         login: resolve(__dirname, 'src/pages/login/login.html'),
         registration: resolve(__dirname, 'src/pages/registration/registration.html'),
+        chatlist: resolve(__dirname, '/src/pages/chatlist/chatlist.html'),
+        usersettings: resolve(__dirname, '/src/pages/usersettings/usersettings.html'),
         error404: resolve(__dirname, '/src/pages/errors/404.html'),
         error500: resolve(__dirname, '/src/pages/errors/500.html'),
       }
     }
   },
   server: {
-    open: '/src/pages/login/signup.html'
+    open: '/src/pages/login/login.html'
   }
 }) 

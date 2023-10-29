@@ -3,7 +3,6 @@ https://www.figma.com/file/SR5uebjW4Z4cCx1NIdYGFy/Messenger-project?type=design&
 
 ### netlify link
 https://kkononenko.netlify.app/
-____________________________________
 
 ### Ветка, в которой делаете задания спринта, должна называться sprint_i, где i - номер спринта. Не переименовывайте её.
 

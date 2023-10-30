@@ -1,0 +1,35 @@
+.main {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    gap: 1rem;
+    width: 50vw;
+    padding: 40px;
+    border: none;
+}
+.avatar {
+    height: 50px;
+    width: 50px;
+    background-color: #dddada;
+    border-radius: 50%;
+    display: inline-block;
+}
+.row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 14rem;
+    border-bottom: 1px solid #EAEAEA;
+    margin: 10px 0;
+    padding: 10px 0 0;
+}
+.row input {
+    border: none;
+
+}
+.actions {
+    margin-top: 3rem;
+}
+.exit-link a {
+    color: red;
+}

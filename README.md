@@ -6,7 +6,7 @@
 npm install
 
 ## Запуск
-npm run dev
+npm run start
 
 ## Билд
 npm run build

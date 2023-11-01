@@ -1,0 +1,54 @@
+{{#> layouts/page title="Настройки пользователя"}}
+<div class="window">
+    <form action="#" method="POST">
+        <div class="main">
+            <div>
+                <input type="file"  accept="image/*" name="avatar" id="file" style="display: none;">              
+                <div class="avatar"></div>
+            </div>
+            <div>Ваше имя</div>
+            <div>
+                <div class="row">
+                    <div>Почта</div>
+                    {{> input/input type="text" name="login" placeholder="email@mail.ru" }}
+                </div>
+                <div class="row">
+                    <div>Логин</div>
+                    {{> input/input type="text" name="login" placeholder="Ваш логин" }}
+                </div>
+                <div class="row">
+                    <div>Имя</div>
+                    {{> input/input type="text" name="first_name" placeholder="Имя" }}
+                </div>
+                <div class="row">
+                    <div>Фамилия</div>
+                    {{> input/input type="text" name="second_name" placeholder="Фамилия" }}
+                </div>
+                <div class="row">
+                    <div>Имя в чате</div>
+                    {{> input/input type="text" name="display_name" placeholder="Ваш ник в чате" }}
+                </div>
+                <div class="row">
+                    <div>Телефон</div>
+                    {{> input/input type="text" name="phone" placeholder="+7 (111) 222 33 44" }}
+                </div>
+                <div class="actions">
+                    <div>
+                    {{> button/button type="submit" class="link-button" label="Изменить данные"}}
+                    </div>
+                    <div><a href="#">Изменить пароль</a></div>
+                    <div class="row">
+                        <div>Старый пароль</div>
+                        {{> input/input type="password" name="oldPassword" }}
+                    </div>
+                    <div class="row">
+                        <div>Новый пароль</div>
+                        {{> input/input type="password" name="newPassword" }}
+                    </div>
+                    <div class="exit-link"><a href="/src/pages/chatlist/chatlist.html">Выйти</a></div>
+                </div>                      
+            </div>
+        </div>
+    </form>
+</div>
+{{/ layouts/page}}

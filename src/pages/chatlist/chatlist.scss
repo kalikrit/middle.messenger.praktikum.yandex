@@ -1,0 +1,89 @@
+.layout {   
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    flex: 1 1 auto;
+    -ms-flex-align: stretch;
+    align-items: stretch;
+    min-height: 0;
+}
+.sidebar {
+    min-width: var(--component-sidebar-base-width);
+    max-width: 480px;
+    width: 25vw;
+    height: 100vh;
+    position: relative;
+    flex: 0 0 25%;
+    display: flex;
+    flex-direction: column;
+    background: white;
+    color: #ededed;
+    border: 1px solid lightgray;
+}
+.main {
+    flex: 1 1;
+    display: flex;
+    border: 1px solid lightgray;
+}
+.header {
+    box-sizing: border-box;
+    color: black;
+    padding-top: 10px;
+    margin-left: 20px;
+    font-size: large;
+}
+.search {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    flex: 0 0 auto;
+    z-index: 10;
+    margin: 10px 5px;
+}
+.search input {height: 40px;}
+.chats {
+    border-top: 1px solid gray;
+    box-sizing: border-box;
+}
+.avatar {
+    height: 50px;
+    width: 50px;
+    background-color: #dddada;
+    border-radius: 50%;
+    display: inline-block;
+}
+.chat {
+    display: flex;
+    border-bottom: 1px solid gray;
+    padding: 10px 5px;
+}
+.chat:hover {
+    background-color: lightgray;
+    border: 1px solid green;
+    cursor: pointer;
+}
+.user {
+    color: black;
+    margin-left: 5px;
+    min-height: 50px;
+}
+.last-message {
+    color: darkgray;
+}
+.lm-time {
+    position: absolute;
+    left: 90%;
+    color: gray;
+    font-weight: 600;
+    font-size: small;
+}
+.settings {
+    position: absolute;
+    left: 90%;
+    color: gray;
+    top:10px;
+}
+.message {
+    margin-top: 2rem;
+    margin-left: 2rem;
+}

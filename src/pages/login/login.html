@@ -1,19 +1,23 @@
-{{#> layouts/page title="Login page"}}
-<div class="window">
-    <div class="card">
-        <h4>Войти в мессенджер</h4>
-        <div class="input-box">
-            <label for="login">Логин</label>
-            <input type="text" id="login" name="login" placeholder="Ваш логин">
-        </div>
-        <div class="input-box">
-            <label for="password">Пароль</label>
-            <input type="password" id="password" name="password" placeholder="Пароль">
-        </div>
-        <input type="button" value="Войти">
-        <div>
-            <a href="/src/pages/registration/registration.html">Ещё не зарегистрированы?</a>
+{{#> layouts/page title="Авторизация"}}
+<main>
+    <div class="window">
+        <div class="card">
+            <h4>Войти в мессенджер</h4>
+            <form action="#" method="POST">
+                <div class="input-box">
+                    <label for="login">Логин</label>
+                    {{> input/input type="text" id="login" name="login" placeholder="Ваш логин" }}
+                </div>
+                <div class="input-box">
+                    <label for="password">Пароль</label>
+                    {{> input/input type="password" id="password" name="password" placeholder="Пароль" }}
+                </div>
+                {{> button/button type="submit" class="button" label="Войти"}}
+            </form>
+            <div>
+                <a href="/src/pages/registration/registration.html">Ещё не зарегистрированы?</a>
+            </div>
         </div>
     </div>
-</div>
+</main>
 {{/ layouts/page}}

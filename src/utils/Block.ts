@@ -15,7 +15,9 @@ _meta = {
   props: TProps,
   tagName: string
 };
-eventBus: EventBus
+
+protected eventBus: () => EventBus;
+
 /** JSDoc
    * @param {string} tagName
    * @param {Object} props
@@ -30,14 +32,11 @@ constructor(tagName = "div", props: TProps = {}) {
   };
 
   this.props = this._makePropsProxy(props);
-
-  this.eventBus = () => eventBus;
-
   this._registerEvents(eventBus);
   eventBus.emit(Block.EVENTS.INIT);
 }
 
-_registerEvents(eventBus) {
+_registerEvents(eventBus: EventBus) {
   eventBus.on(Block.EVENTS.INIT, this.init.bind(this));
   eventBus.on(Block.EVENTS.FLOW_CDM, this._componentDidMount.bind(this));
   eventBus.on(Block.EVENTS.FLOW_CDU, this._componentDidUpdate.bind(this));

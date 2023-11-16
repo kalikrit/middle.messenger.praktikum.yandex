@@ -8,14 +8,14 @@ export default class LoginForm extends Block {
   };
 
   constructor() {
-    super();
+    super({ componentName: 'Login' });
     this.setProps(this.initial);
   }
 
   init():boolean {
-    this.events = {
-      submit: this.onSubmit.bind(this),
-    };
+    // this.events = {
+    //   submit: this.onSubmit.bind(this),
+    // };
     return true;
   }
 
@@ -60,17 +60,42 @@ export default class LoginForm extends Block {
     const { error } = props.state;
 
 return (`
-<form action="#" method="POST">
-    <div class="input-box">
-        <label for="login">Логин</label>
-        {{> input/input type="text" id="login" name="login" placeholder="Ваш логин" }}
+<div class="window">
+  <div class="card">
+    <h4>Войти в мессенджер</h4>
+    <form action="preventDefault()" method="POST">
+      <div class="input-box">
+      {{{ Field 
+        name="login" 
+        label="Логин"
+        class="text-input_flat text-input_flat_ocean"
+        toggle=true
+        value=state.login
+        error="${error?.login || ''}"
+        onBlur=onBlur
+        }}}        
+      </div>
+      <div class="input-box">
+      {{{ Field 
+        name="password"
+        label="Пароль"
+        class="text-input_flat text-input_flat_ocean"
+        toggle=true value=state.password
+        onBlur=onBlur
+        error="${error?.password || ''}"
+      }}}      
+      </div>
+      {{{ Button
+        type="submit"
+        class="button"
+        label="Войти"
+      }}}
+    </form>
+    <div>
+      <a href="/?page=register">Ещё не зарегистрированы?</a>
     </div>
-    <div class="input-box">
-        <label for="password">Пароль</label>
-        {{> input/input type="password" id="password" name="password" placeholder="Пароль" }}
-    </div>
-    {{> button/button type="submit" class="button" label="Войти"}}
-</form>    
+  </div>
+</div>  
 `);
   }
 }

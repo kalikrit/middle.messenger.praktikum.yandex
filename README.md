@@ -1,9 +1,9 @@
 # Мессенджер
 ## Проект написан на javascript использует шаблонизатор handlebars
-## version 1.2.1 / 14.11.2023
+## version 1.3.4 / 16.11.2023
 
 ### проект использует:
- - node.js 20.9.0
+ - node.js ^20
  - TS ^5.2.2
  - eslint-config-airbnb ^19.0.4
  - stylelint ^15.11.0

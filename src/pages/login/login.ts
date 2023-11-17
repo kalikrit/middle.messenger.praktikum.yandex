@@ -99,6 +99,7 @@ return (`
       <a href="/?page=register">Ещё не зарегистрированы?</a>
     </div>
   </div>
+  {{{ Version }}}
 </div>  
 `);
   }

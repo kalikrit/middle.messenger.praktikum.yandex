@@ -147,6 +147,7 @@ return (`
             <a href="/?page=login">Войти</a>
         </div>
     </div>
+    {{{ Version }}}
 </div>
 `);
   }

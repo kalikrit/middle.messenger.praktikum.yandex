@@ -1,10 +1,9 @@
 import Block from '../../utils/Block';
 
-export default class Chatlist extends Block {
+export default class ChatList extends Block {
 
   constructor() {
-    super({ componentName: 'Chatlist' });
-    this.setProps(this.initial);
+    super({ componentName: 'ChatList' });
   }
 
   init():boolean {

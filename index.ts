@@ -3,9 +3,10 @@ import * as partials from './src/partials'
 import { register } from './src/utils/Template'
 import LoginForm from './src/pages/login/login'
 import RegistrationForm from './src/pages/registration/registration'
-import Chatlist from './src/pages/chatlist/chatlist'
+import ChatList from './src/pages/chatlist/chatlist'
 import Error404 from './src/pages/errors/404'
 import Error500 from './src/pages/errors/500'
+import IndexPage from './src/pages/indexpage/index'
 
 import './src/pages/common.scss'
 
@@ -15,7 +16,8 @@ const Login = new LoginForm()
 const Registration = new RegistrationForm()
 const E404 = new Error404()
 const E500 = new Error500()
-const Chats = new Chatlist()
+const Chats = new ChatList()
+const Index = new IndexPage()
 
 
 const urlParams = new URLSearchParams(window.location.search)
@@ -27,9 +29,6 @@ const pages: Record<string, Block> = {
   e404: E404,
   e500: E500,
   chats: Chats
-//   profile: Profile,
-//   profileEdit: ProfileEdit,
-//   profileEditPassword: ProfileEditPassword,
 };
 const main = document.querySelector('#main') || document.createElement('div');
 
@@ -37,6 +36,5 @@ if (page) {
   const node = pages[page].getNode();
   main.append(node);
 } else {
-  // страница не найдена
-  main.append(E404.getNode())
+  main.append(Index.getNode());
 }

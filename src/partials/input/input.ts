@@ -1,7 +1,17 @@
 import Block from '../../utils/Block';
 
-export default class Field extends Block {
-  constructor(props: Array<Record<string, any>>) {
+interface IPropsInput {
+  id: string,
+  type: string,
+  name: string,
+  label: string,
+  placeholder: string,
+  value: string,
+}
+
+export default class Input extends Block {
+  
+  constructor(props: IPropsInput) {
     super({ componentName: 'Input', ...props });
   }
 

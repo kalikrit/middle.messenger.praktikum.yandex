@@ -1,6 +1,7 @@
 import Block from '../../utils/Block';
 
 export default class Field extends Block {
+  
   constructor(props: Array<Record<string, any>>) {
     super({ componentName: 'Field', ...props });
   }
@@ -17,8 +18,10 @@ export default class Field extends Block {
     {{/if}}
     {{{ Input
        name=name
+       type=type
        label=label
        class=class
+       placeholder=placeholder
        onBlur=onBlur
        value=value
     }}}

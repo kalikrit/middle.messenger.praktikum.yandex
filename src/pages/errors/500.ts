@@ -1,6 +1,7 @@
 import Block from '../../utils/Block';
 
 export default class Error500 extends Block {
+
   constructor(props: Array<Record<string, any>>) {
     super({ componentName: 'Error500', ...props });
   }

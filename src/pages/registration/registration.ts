@@ -1,11 +1,7 @@
 import Block from '../../utils/Block';
 
 export default class RegistrationForm extends Block {
-  protected initial = {
-    login: '',
-    password: '',
-    error: {},
-  };
+  protected initial = {};
 
   constructor() {
     super({ componentName: 'Registration' });
@@ -67,8 +63,9 @@ return (`
             <div class="input-box">
             {{{ Field 
                 name="email"
+                type="email"
                 label="Почта"
-                class="text-input_flat text-input_flat_ocean"
+                placeholder="Почта"
                 toggle=true value=state.email
                 onBlur=onBlur
                 error="${error?.email || ''}"
@@ -77,8 +74,9 @@ return (`
             <div class="input-box">
             {{{ Field 
                 name="login"
-                label="Ваш логин"
-                class="text-input_flat text-input_flat_ocean"
+                type="text"
+                placeholder="Ваш логин"
+                label="Логин"
                 toggle=true value=state.login
                 onBlur=onBlur
                 error="${error?.login || ''}"
@@ -87,8 +85,9 @@ return (`
             <div class="input-box">
             {{{ Field 
                 name="first_name"
-                label="Ваше имя"
-                class="text-input_flat text-input_flat_ocean"
+                type="text"
+                label="Имя"
+                placeholder="Ваше имя"
                 toggle=true value=state.first_name
                 onBlur=onBlur
                 error="${error?.first_name || ''}"
@@ -97,8 +96,9 @@ return (`
             <div class="input-box">
             {{{ Field 
                 name="second_name"
+                type="text"
+                placeholder="Фамилия"
                 label="Фамилия"
-                class="text-input_flat text-input_flat_ocean"
                 toggle=true value=state.second_name
                 onBlur=onBlur
                 error="${error?.second_name || ''}"
@@ -107,9 +107,9 @@ return (`
             <div class="input-box">
             {{{ Field 
                 name="phone"
+                type="phone"
                 label="Телефон"
                 placeholder="+7 (111) 222 33 44"
-                class="text-input_flat text-input_flat_ocean"
                 toggle=true value=state.phone
                 onBlur=onBlur
                 error="${error?.phone || ''}"
@@ -118,9 +118,9 @@ return (`
             <div class="input-box">
             {{{ Field 
                 name="password"
-                label="Пароль"
                 type="password"
-                class="text-input_flat text-input_flat_ocean"
+                label="Пароль"
+                placeholder="Пароль"
                 toggle=true value=state.password
                 onBlur=onBlur
                 error="${error?.password || ''}"
@@ -129,9 +129,9 @@ return (`
             <div class="input-box">
             {{{ Field 
                 name="password_again"
-                label="Повторите пароль"
                 type="password"
-                class="text-input_flat text-input_flat_ocean"
+                label="Повторите пароль"
+                placeholder="Повторите пароль"
                 toggle=true value=state.password_again
                 onBlur=onBlur
                 error="${error?.password_again || ''}"

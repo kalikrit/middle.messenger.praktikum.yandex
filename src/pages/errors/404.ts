@@ -1,6 +1,7 @@
 import Block from '../../utils/Block';
 
 export default class Error404 extends Block {
+
   constructor(props: Array<Record<string, any>>) {
     super({ componentName: 'Error404', ...props });
   }

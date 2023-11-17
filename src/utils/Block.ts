@@ -23,16 +23,15 @@ export default abstract class Component {
   protected props: IProps;
 
   constructor(props: IProps, children?: Record<string, any>) {
-    const eventBus = new EventBus();
-    this.domElement = null;
-    this.eventBus = () => eventBus;
-    this.props = this._makePropsProxy({ ...props, state: {} });
 
-    if (children !== undefined
-            && children !== null
-            && Object.entries(children).length > 0) {
-      this.registerChildComponent(children);
-    }
+    this.domElement = null;
+    this.props = this._makePropsProxy({
+       ...props, state: {} 
+    });
+    const eventBus = new EventBus();
+    this.eventBus = () => eventBus;
+
+    if (children !== null && children !== undefined) this.registerChildComponent(children);
 
     this._registerEvents(eventBus);
     eventBus.emit(Events.INIT);
@@ -60,9 +59,7 @@ export default abstract class Component {
 
   _componentDidUpdate() {
     const response = this.componentDidUpdate();
-    if (response) {
-      this.eventBus().emit(Events.FLOW_RENDER);
-    }
+    if (response) this.eventBus().emit(Events.FLOW_RENDER);
   }
 
   // Может переопределять пользователь, необязательно трогать
@@ -84,15 +81,12 @@ export default abstract class Component {
   };
 
   protected registerChildComponent(children: Record<string, Component>):void {
-    for (const child of Object.entries(children)) {
-      register(child);
-    }
+    for (const child of Object.entries(children)) register(child);
   }
 
   public getNode(): Element {
-    if (!this.domElement) {
-      this._render();
-    }
+
+    if (!this.domElement) this._render();
 
     return this.domElement as Element;
   }
@@ -103,12 +97,9 @@ export default abstract class Component {
 
     const newElement: Element | null = fragment.firstElementChild || null;
 
-    if (this.domElement) {
-      this.domElement.replaceWith(newElement || '');
-    }
+    if (this.domElement) this.domElement.replaceWith(newElement || '');
 
     this.domElement = newElement;
-
     this._mountComponent();
   }
 
@@ -121,10 +112,12 @@ export default abstract class Component {
   }
 
   _unmountComponent() {
+
     if (this.domElement) {
       this._componentWillUnmount();
       this._removeListeners();
-      if (this.children) {
+
+    if (this.children) {
         this.children.forEach(({ component }) => component.unmountComponent());
       }
     }
@@ -135,6 +128,7 @@ export default abstract class Component {
   }
 
   _removeListeners() {
+
     if (this.events) {
       Object.entries(this.events).forEach(([event, callback]) => {
         this.domElement?.removeEventListener(event, callback);
@@ -161,14 +155,13 @@ export default abstract class Component {
     this.children = children.length > 0 ? children : this.children;
     temp.innerHTML = html;
 
-    this.children?.forEach(({ embed }) => {
-      embed(temp.content);
-    });
+    this.children?.forEach(({ embed }) => embed(temp.content));
 
     return temp.content;
   }
 
   private _makePropsProxy<T extends Record<string, any>>(props: T) {
+    
     return new Proxy(props, {
       set(target, prop, value) {
         /* eslint no-param-reassign: 0 */

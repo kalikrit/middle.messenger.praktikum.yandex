@@ -1,9 +1,33 @@
-{{#> layouts/page title="Список чатов"}}
+import Block from '../../utils/Block';
+
+export default class Chatlist extends Block {
+
+  constructor() {
+    super({ componentName: 'Chatlist' });
+    this.setProps(this.initial);
+  }
+
+  init():boolean {
+    return true;
+  }
+
+  componentDidUpdate(): boolean {
+    const { state } = this.props;
+    /* eslint no-console: 0 */
+    console.log(state);
+    return true;
+  }
+
+  render() {
+    const { props } = this;
+    const { error } = props.state;
+
+return (`
 <div class="layout">
     <div class="sidebar">
         <div class="header">Мессенджер Практикум
             <div class="settings">
-                <a href="/src/pages/usersettings/usersettings.html">
+                <a href="/?page=uset">
                     <svg fill="#000000" height="20px" width="20px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
                     viewBox="0 0 478.703 478.703" xml:space="preserve">
                         <g>
@@ -38,7 +62,15 @@
             </div>
         </div>
         <div class="search">
-            {{> input/input type="search" placeholder="Поиск" name="message" }}
+          {{{ Field 
+            name="message"
+            type="search"
+            placeholder="Поиск"
+            toggle=true
+            value=state.message
+            error="${error?.message || ''}"
+            onBlur=onBlur
+          }}}
         </div>
         <div class="chats">
             <div class="chat">
@@ -95,4 +127,6 @@
         <div class="message">Выберите чат для начала общения</div>
     </div>
 </div>
-{{/ layouts/page}}
+`);
+  }
+}

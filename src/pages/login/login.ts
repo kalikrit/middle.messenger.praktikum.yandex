@@ -66,19 +66,23 @@ return (`
     <form action="preventDefault()" method="POST">
       <div class="input-box">
       {{{ Field 
-        name="login" 
+        name="login"
+        type="text"
         label="Логин"
+        placeholder="Ваш логин"
         class="text-input_flat text-input_flat_ocean"
         toggle=true
         value=state.login
         error="${error?.login || ''}"
         onBlur=onBlur
-        }}}        
+      }}}        
       </div>
       <div class="input-box">
       {{{ Field 
         name="password"
+        type="password"
         label="Пароль"
+        placeholder="Пароль"
         class="text-input_flat text-input_flat_ocean"
         toggle=true value=state.password
         onBlur=onBlur

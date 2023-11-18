@@ -9,24 +9,28 @@ export default class Field extends Block {
   render() {
     return (`
 <div class="input">
-    {{#if toggle }}
       <label
        for="{{ name }}"
        class="label label_toggle">
          {{ label }}
       </label>
-    {{/if}}
     {{{ Input
+       id=id
        name=name
        type=type
        label=label
        class=class
        placeholder=placeholder
+       autocomplete=autocomplete
        onBlur=onBlur
        value=value
     }}}
-    {{#if error}} <span class="text-small text-error">{{error}}</span> {{/if}}
+    {{#if error}} 
+      <div class="error">
+        {{error}}
+      </div> 
+    {{/if}}
 </div>
-        `);
+    `);
   }
 }

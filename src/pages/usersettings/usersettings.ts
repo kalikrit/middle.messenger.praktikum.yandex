@@ -1,15 +1,51 @@
-import Block from '../../utils/Block';
+import Block from '../../utils/Block'
+import validateForm from '../../utils/Validation'
 
 export default class UserSettings extends Block {
 
-  constructor() {
-    super({ componentName: 'UserSettings' });
-  }
-
-  init():boolean {
-    return true;
-  }
-
+    constructor() {
+        super({ 
+          onBlur: (e: Record<string, any>) => {
+            this.validateField(e);
+          },
+         });
+      }
+    
+      init():boolean {
+        this.events = {
+          submit: this.onSubmit.bind(this),
+        };
+        return true;
+      }
+    
+      validateField(event: Record<string, any>) {
+        event.preventDefault();
+        const { target } = event;
+        const { name, value } = target;
+        const input = { [name]: value };
+        const errorField: Record<string, any> | boolean = validateForm(input);
+        const { props } = this;
+        const { error } = props.state;
+        const updateError = { ...error, [name]: errorField[name] };
+        this.setProps({
+          ...input,
+          error: updateError,
+        });
+      }
+    
+      validateForm(form: HTMLFormElement) {
+        const formData = new FormData(form);
+        const formObject = Object.fromEntries(formData.entries());
+        const error = validateForm(formObject);
+    
+        this.setProps({ ...formObject, error });
+      }
+    
+      onSubmit(event: Record<string, any>) {
+        event.preventDefault();
+        const { target } = event;
+        this.validateForm(target);
+      }
   componentDidUpdate(): boolean {
     const { state } = this.props;
     /* eslint no-console: 0 */
@@ -33,51 +69,56 @@ return (`
             <div>
                 <div class="row">
                 <div>Почта</div>
-        {{{ Field 
+        {{{ Field
+            id="email"
             name="email"
             type="email"
             placeholder="Почта"
-            toggle=true value=state.email
+            value=state.email
             onBlur=onBlur
             error="${error?.email || ''}"
         }}}
                 </div>
                 <div class="row">
                 <div>Логин</div>
-        {{{ Field 
+        {{{ Field
+            id="login"
             name="login"
             type="text"
             placeholder="Ваш логин"
-            toggle=true value=state.login
+            value=state.login
             onBlur=onBlur
-            error="${error?.email || ''}"
+            error="${error?.login || ''}"
         }}}
                 </div>
                 <div class="row">
                 <div>Имя</div>
-        {{{ Field 
+        {{{ Field
+            id="first_name"
             name="first_name"
             type="text"
             placeholder="Имя"
-            toggle=true value=state.first_name
+            value=state.first_name
             onBlur=onBlur
             error="${error?.first_name || ''}"
         }}}
                 </div>
                 <div class="row">
                 <div>Фамилия</div>
-        {{{ Field 
+        {{{ Field
+            id="second_name"
             name="second_name"
             type="text"
             placeholder="Фамилия"
-            toggle=true value=state.second_name
+            value=state.second_name
             onBlur=onBlur
             error="${error?.second_name || ''}"
         }}}
                 </div>
                 <div class="row">
                 <div>Имя в чате</div>
-        {{{ Field 
+        {{{ Field
+            id="display_name"
             name="display_name"
             type="text"
             placeholder="Ваш ник в чате"
@@ -88,11 +129,12 @@ return (`
                 </div>
                 <div class="row">
                 <div>Телефон</div>
-        {{{ Field 
+        {{{ Field
+            id="phone"
             name="phone"
             type="phone"
             placeholder="+7 (111) 222 33 44"
-            toggle=true value=state.phone
+            value=state.phone
             onBlur=onBlur
             error="${error?.phone || ''}"
         }}}
@@ -108,22 +150,24 @@ return (`
                     <div><a href="#">Изменить пароль</a></div>
                     <div class="row">
                     <div>Старый пароль</div>
-        {{{ Field 
+        {{{ Field
+            id="oldPassword"
             name="oldPassword"
             type="password"
             placeholder="Старый пароль"
-            toggle=true value=state.oldPassword
+            value=state.oldPassword
             onBlur=onBlur
             error="${error?.oldPassword || ''}"
         }}}
                     </div>
                     <div class="row">
                     <div>Новый пароль</div>
-        {{{ Field 
+        {{{ Field
+            id="newPassword"
             name="newPassword"
             type="password"
             placeholder="Новый пароль"
-            toggle=true value=state.newPassword
+            value=state.newPassword
             onBlur=onBlur
             error="${error?.newPassword || ''}"
         }}}

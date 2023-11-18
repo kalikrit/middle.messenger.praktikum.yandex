@@ -1,13 +1,50 @@
-import Block from '../../utils/Block';
+import Block from '../../utils/Block'
+import validateForm from '../../utils/Validation';
 
 export default class ChatList extends Block {
 
-  constructor() {
-    super({ componentName: 'ChatList' });
-  }
+    constructor() {
+        super({ 
+          onBlur: (e: Record<string, any>) => {
+            this.validateField(e);
+          },
+         });
+      }
 
   init():boolean {
+    this.events = {
+      submit: this.onSubmit.bind(this),
+    };
     return true;
+  }
+
+  validateField(event: Record<string, any>) {
+    event.preventDefault();
+    const { target } = event;
+    const { name, value } = target;
+    const input = { [name]: value };
+    const errorField: Record<string, any> | boolean = validateForm(input);
+    const { props } = this;
+    const { error } = props.state;
+    const updateError = { ...error, [name]: errorField[name] };
+    this.setProps({
+      ...input,
+      error: updateError,
+    });
+  }
+
+  validateForm(form: HTMLFormElement) {
+    const formData = new FormData(form);
+    const formObject = Object.fromEntries(formData.entries());
+    const error = validateForm(formObject);
+
+    this.setProps({ ...formObject, error });
+  }
+
+  onSubmit(event: Record<string, any>) {
+    event.preventDefault();
+    const { target } = event;
+    this.validateForm(target);
   }
 
   componentDidUpdate(): boolean {
@@ -61,15 +98,17 @@ return (`
             </div>
         </div>
         <div class="search">
-          {{{ Field 
+        <form action="preventDefault()" method="POST">
+          {{{ Field
+            id="message"
             name="message"
             type="search"
             placeholder="Поиск"
-            toggle=true
             value=state.message
             error="${error?.message || ''}"
             onBlur=onBlur
           }}}
+        </form>
         </div>
         <div class="chats">
             <div class="chat">

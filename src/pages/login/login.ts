@@ -1,4 +1,5 @@
 import Block from '../../utils/Block';
+import validateForm from '../../utils/Validation';
 
 export default class LoginForm extends Block {
   protected initial = {
@@ -8,45 +9,49 @@ export default class LoginForm extends Block {
   };
 
   constructor() {
-    super({ componentName: 'Login' });
+    super({ 
+      onBlur: (e: Record<string, any>) => {
+        this.validateField(e);
+      },
+     });
     this.setProps(this.initial);
   }
 
   init():boolean {
-    // this.events = {
-    //   submit: this.onSubmit.bind(this),
-    // };
+    this.events = {
+      submit: this.onSubmit.bind(this),
+    };
     return true;
   }
 
-//   validateField(event: Record<string, any>) {
-//     event.preventDefault();
-//     const { target } = event;
-//     const { name, value } = target;
-//     const input = { [name]: value };
-//     const errorField: Record<string, any> | boolean = formValidate(input);
-//     const { props } = this;
-//     const { error } = props.state;
-//     const updateError = { ...error, [name]: errorField[name] };
-//     this.setProps({
-//       ...input,
-//       error: updateError,
-//     });
-//   }
+  validateField(event: Record<string, any>) {
+    event.preventDefault();
+    const { target } = event;
+    const { name, value } = target;
+    const input = { [name]: value };
+    const errorField: Record<string, any> | boolean = validateForm(input);
+    const { props } = this;
+    const { error } = props.state;
+    const updateError = { ...error, [name]: errorField[name] };
+    this.setProps({
+      ...input,
+      error: updateError,
+    });
+  }
 
-//   validateForm(form: HTMLFormElement) {
-//     const formData = new FormData(form);
-//     const formObject = Object.fromEntries(formData.entries());
-//     const error = formValidate(formObject);
+  validateForm(form: HTMLFormElement) {
+    const formData = new FormData(form);
+    const formObject = Object.fromEntries(formData.entries());
+    const error = validateForm(formObject);
 
-//     this.setProps({ ...formObject, error });
-//   }
+    this.setProps({ ...formObject, error });
+  }
 
-//   onSubmit(event: Record<string, any>) {
-//     event.preventDefault();
-//     const { target } = event;
-//     this.validateForm(target);
-//   }
+  onSubmit(event: Record<string, any>) {
+    event.preventDefault();
+    const { target } = event;
+    this.validateForm(target);
+  }
 
   componentDidUpdate(): boolean {
     const { state } = this.props;
@@ -67,24 +72,25 @@ return (`
       <div class="input-box">
       {{{ Field 
         name="login"
+        id="login"
         type="text"
         label="Логин"
         placeholder="Ваш логин"
-        class="text-input_flat text-input_flat_ocean"
-        toggle=true
+        autocomplete="true"
         value=state.login
         error="${error?.login || ''}"
         onBlur=onBlur
       }}}        
       </div>
       <div class="input-box">
-      {{{ Field 
+      {{{ Field
+        id="password"
         name="password"
         type="password"
         label="Пароль"
         placeholder="Пароль"
-        class="text-input_flat text-input_flat_ocean"
-        toggle=true value=state.password
+        autocomplete="true"
+        value=state.password
         onBlur=onBlur
         error="${error?.password || ''}"
       }}}      

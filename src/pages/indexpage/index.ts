@@ -20,6 +20,7 @@ export default class IndexPage extends Block {
      <li><a href="/?page=e500">Страница 500</a></li>
    </ul>
  </nav>
+ {{{ Version }}}
 </div>
 `);
   }

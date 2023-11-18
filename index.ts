@@ -4,6 +4,7 @@ import { register } from './src/utils/Template'
 import LoginForm from './src/pages/login/login'
 import RegistrationForm from './src/pages/registration/registration'
 import ChatList from './src/pages/chatlist/chatlist'
+import UserSettings from './src/pages/usersettings/usersettings'
 import Error404 from './src/pages/errors/404'
 import Error500 from './src/pages/errors/500'
 import IndexPage from './src/pages/indexpage/index'
@@ -17,6 +18,7 @@ const Registration = new RegistrationForm()
 const E404 = new Error404()
 const E500 = new Error500()
 const Chats = new ChatList()
+const USettings = new UserSettings()
 const Index = new IndexPage()
 
 
@@ -28,7 +30,8 @@ const pages: Record<string, Block> = {
   register: Registration,
   e404: E404,
   e500: E500,
-  chats: Chats
+  chats: Chats,
+  uset: USettings
 };
 const main = document.querySelector('#main') || document.createElement('div');
 

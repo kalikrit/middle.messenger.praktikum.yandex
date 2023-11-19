@@ -1,9 +1,69 @@
-{{#> layouts/page title="Список чатов"}}
+import Block from '../../utils/Block'
+import validateForm from '../../utils/Validation';
+
+export default class ChatList extends Block {
+
+    constructor() {
+        super({ 
+          onBlur: (e: Record<string, any>) => {
+            this.validateField(e);
+          },
+         });
+      }
+
+  init():boolean {
+    this.events = {
+      submit: this.onSubmit.bind(this),
+    };
+    return true;
+  }
+
+  validateField(event: Record<string, any>) {
+    event.preventDefault();
+    const { target } = event;
+    const { name, value } = target;
+    const input = { [name]: value };
+    const errorField: Record<string, any> | boolean = validateForm(input);
+    const { props } = this;
+    const { error } = props.state;
+    const updateError = { ...error, [name]: errorField[name] };
+    this.setProps({
+      ...input,
+      error: updateError,
+    });
+  }
+
+  validateForm(form: HTMLFormElement) {
+    const formData = new FormData(form);
+    const formObject = Object.fromEntries(formData.entries());
+    const error = validateForm(formObject);
+
+    this.setProps({ ...formObject, error });
+  }
+
+  onSubmit(event: Record<string, any>) {
+    event.preventDefault();
+    const { target } = event;
+    this.validateForm(target);
+  }
+
+  componentDidUpdate(): boolean {
+    const { state } = this.props;
+    /* eslint no-console: 0 */
+    console.log(state);
+    return true;
+  }
+
+  render() {
+    const { props } = this;
+    const { error } = props.state;
+
+return (`
 <div class="layout">
     <div class="sidebar">
         <div class="header">Мессенджер Практикум
             <div class="settings">
-                <a href="/src/pages/usersettings/usersettings.html">
+                <a href="/?page=uset">
                     <svg fill="#000000" height="20px" width="20px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
                     viewBox="0 0 478.703 478.703" xml:space="preserve">
                         <g>
@@ -38,7 +98,17 @@
             </div>
         </div>
         <div class="search">
-            {{> input/input type="search" placeholder="Поиск" name="message" }}
+        <form action="preventDefault()" method="POST">
+          {{{ Field
+            id="message"
+            name="message"
+            type="search"
+            placeholder="Поиск"
+            value=state.message
+            error="${error?.message || ''}"
+            onBlur=onBlur
+          }}}
+        </form>
         </div>
         <div class="chats">
             <div class="chat">
@@ -95,4 +165,6 @@
         <div class="message">Выберите чат для начала общения</div>
     </div>
 </div>
-{{/ layouts/page}}
+`);
+  }
+}

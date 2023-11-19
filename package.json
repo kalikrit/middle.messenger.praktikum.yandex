@@ -1,7 +1,7 @@
 {
   "name": "messenger",
-  "version": "1.0.0",
-  "description": "project messenger in yandex practicum",
+  "version": "1.4.5 / 18.11.2023",
+  "description": "project messenger in Yandex Practicum",
   "author": "Konstantin Kononenko",
   "license": "ISC",
   "scripts": {
@@ -11,15 +11,21 @@
     "preview": "vite preview"
   },
   "engines": {
-    "node": ">12"
+    "node": "^20"
   },
   "dependencies": {
     "express": "^4.18.2"
   },
   "devDependencies": {
+    "typescript": "^5.2.2",
+    "@typescript-eslint/eslint-plugin": "^6.10.0",
+    "eslint": "^8.53.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "sass": "^1.64.2",
+    "stylelint": "^15.10.3",
+    "stylelint-scss": "^5.2.1",
     "vite": "^4.4.5",
-    "vite-plugin-handlebars": "^1.6.0",
-    "sass": "^1.64.2"
+    "vite-plugin-handlebars": "^1.6.0"
   },
   "repository": {
     "type": "git",
@@ -27,7 +33,9 @@
   },
   "keywords": [
     "messenger",
-    "vite"
+    "vite",
+    "ts",
+    "handlebars"
   ],
   "homepage": "https://github.com/kalikrit/middle.messenger.praktikum.yandex#readme"
 }

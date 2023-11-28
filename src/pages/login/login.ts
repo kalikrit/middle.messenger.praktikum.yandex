@@ -1,5 +1,8 @@
 import Block from '../../utils/Block';
 import validateForm from '../../utils/Validation';
+import UserController from '../../controller/UserController';
+
+const uctl = new UserController();
 
 export default class LoginForm extends Block {
   protected initial = {
@@ -8,11 +11,15 @@ export default class LoginForm extends Block {
     error: {},
   };
 
-  constructor() {
+  constructor(props: Record<string, string | number>) {
     super({ 
       onBlur: (e: Record<string, any>) => {
         this.validateField(e);
       },
+      onRegister: () => {
+        this.onRegister.apply(this)
+      },
+      ...props
      });
     this.setProps(this.initial);
   }
@@ -39,18 +46,28 @@ export default class LoginForm extends Block {
     });
   }
 
-  validateForm(form: HTMLFormElement) {
-    const formData = new FormData(form);
-    const formObject = Object.fromEntries(formData.entries());
+  validateForm(formObject: object) {
     const error = validateForm(formObject);
-
     this.setProps({ ...formObject, error });
+
+    return Object.keys(error).length === 0;
   }
 
   onSubmit(event: Record<string, any>) {
     event.preventDefault();
     const { target } = event;
-    this.validateForm(target);
+
+    const formData = new FormData(target);
+    const formObject = Object.fromEntries(formData.entries());
+    const valid = this.validateForm(target);
+
+    if(!valid) return;
+
+    uctl.authUser(formObject);
+  }
+
+  onRegister() {
+    this.router.go('register');
   }
 
   componentDidUpdate(): boolean {
@@ -68,7 +85,7 @@ return (`
 <div class="window">
   <div class="card">
     <h4>Войти в мессенджер</h4>
-    <form action="preventDefault()" method="POST">
+    <form action="#">
       <div class="input-box">
       {{{ Field 
         name="login"

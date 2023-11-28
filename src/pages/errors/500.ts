@@ -11,7 +11,7 @@ export default class Error500 extends Block {
 <div class="window">
  <h1>500 - Ошибка на стороне сервера</h1>
  <h3>Попробуйте перезагрузить страницу</h3>
- <a href="/?page=chats">Вернуться к чатам</a>
+ <a href="/">Вернуться на главную</a>
 </div>
 `);
   }

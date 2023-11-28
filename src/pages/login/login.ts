@@ -102,7 +102,7 @@ return (`
       }}}
     </form>
     <div>
-      <a href="/?page=register">Ещё не зарегистрированы?</a>
+      <a href="/register">Ещё не зарегистрированы?</a>
     </div>
   </div>
   {{{ Version }}}

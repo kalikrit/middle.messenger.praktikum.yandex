@@ -154,7 +154,7 @@ return (`
             }}}
         </form>
         <div>
-            <a href="/?page=login">Войти</a>
+            <a href="/login">Войти</a>
         </div>
     </div>
     {{{ Version }}}

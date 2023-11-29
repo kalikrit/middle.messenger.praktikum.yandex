@@ -1,6 +1,11 @@
 import ApiUser from '../services/user';
 import store from '../utils/Store';
 
+const auth = () => {
+  store.set('auth', true);
+  window.localStorage.setItem('auth', 'true');
+}
+
 const logout = () => {
   store.set('auth', false);
   window.localStorage.removeItem('auth');
@@ -18,14 +23,12 @@ class UserController {
     this.api.login(formObject)
     .then((data: Record<string, any>) => {
       if (data.status === 200) {
-        store.set('auth', true);
-        window.localStorage.setItem('auth', 'true');
+        auth()
       }
       if (data.status === 400) {
         const response = data && data.status ? JSON.parse(data.response) : null;
         if (response.reason === 'User already in system') {
-          store.set('auth', true);
-          window.localStorage.setItem('auth', 'true');
+          auth();
         }
       }
     })
@@ -62,7 +65,7 @@ class UserController {
   public getUser() {
     this.api.user()
     .then((data: Record<string, any>) => {
-      if (data && data.status === 200) {
+      if (data || data?.status === 200) {
         store.set('user', JSON.parse(data.response));
       } else {
         logout();

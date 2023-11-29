@@ -1,5 +1,5 @@
 import EventBus from './EventBus';
-import { set } from './Utils';
+import { messenger_set } from './Utils';
 import { Indexed } from '../types/types';
 
 export enum StoreEvents {
@@ -30,7 +30,7 @@ class Store extends EventBus {
   }
 
   public set(path: string, value: unknown) {
-    set(this.state, path, value);
+    messenger_set(this.state, path, value);
 
     // метод EventBus
     this.emit(StoreEvents.Updated, path);

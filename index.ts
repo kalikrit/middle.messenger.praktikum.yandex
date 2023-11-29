@@ -15,7 +15,8 @@ import UserController from './src/controller/UserController';
 
 import './src/pages/common.scss'
 
-Object.entries(partials).forEach((partial) => register(partial))
+Object.entries(partials)
+  .forEach((partial) => register(partial))
 
 const main = document.querySelector('#main') || document.createElement('div');
 const router = new Router(main);
@@ -24,7 +25,6 @@ const auth = window.localStorage.getItem('auth');
 
 store.on(StoreEvents.Updated, (prop) => {
   const state: Record<string, any> = store.getState();
-  console.dir('STATE:', state)
   const location = window.location.pathname.slice(1);
 
   if (prop === 'auth') {
@@ -33,7 +33,6 @@ store.on(StoreEvents.Updated, (prop) => {
     }
 
     if (state.auth) {
-
       router.redirect('', 'main');
       router.use('main', IndexPage)
       router.use('chats', ChatList);
@@ -42,7 +41,6 @@ store.on(StoreEvents.Updated, (prop) => {
       userController.getUser();
 
       return;
-
     } else {
       router.redirect('', 'login');
       router.use('main', IndexPage)
@@ -57,6 +55,7 @@ store.on(StoreEvents.Updated, (prop) => {
   if (router._currentRoute && !router.getRoute(location)) {
     router.go('');
   }
+
   if (!router._currentRoute) {
     router.start();
   }

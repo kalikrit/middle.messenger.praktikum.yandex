@@ -48,7 +48,7 @@ function isString(value: unknown): value is string {
   return Object.prototype.toString.call(value) === '[object String]';
 }
 
-function set(object: Indexed | unknown, path: string, value: unknown): Indexed | unknown {
+function messenger_set(object: Indexed | unknown, path: string, value: unknown): Indexed | unknown {
   if (!isPlainObject(object)) {
     return object;
   }
@@ -77,5 +77,5 @@ function set(object: Indexed | unknown, path: string, value: unknown): Indexed |
 
 
 export {
-  set, isEqual, isArray
+  messenger_set, isEqual, isArray
 };

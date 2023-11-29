@@ -85,7 +85,7 @@ return (`
 <div class="window">
   <div class="card">
     <h4>Войти в мессенджер</h4>
-    <form action="#">
+    <form>
       <div class="input-box">
       {{{ Field 
         name="login"

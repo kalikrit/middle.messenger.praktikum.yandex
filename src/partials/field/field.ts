@@ -8,10 +8,9 @@ export default class Field extends Block {
 
   render() {
     return (`
-<div class="input">
+<div class="{{ class }}">
       <label
-       for="{{ name }}"
-       class="label label_toggle">
+       for="{{ name }}">
          {{ label }}
       </label>
     {{{ Input

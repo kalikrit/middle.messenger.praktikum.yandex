@@ -6,14 +6,14 @@ export enum StoreEvents {
     Updated = 'updated',
 }
 
-// наследуем Store от EventBus, чтобы его методы были сразу доступны у экземпляра Store
+// наследуем Store от EventBus, 
+// чтобы его методы были сразу доступны у экземпляра Store
 class Store extends EventBus {
   private state: Indexed;
 
   constructor() {
     super();
     this.state = {
-
       error: null,
       user: null,
       users: [],

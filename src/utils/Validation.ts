@@ -56,6 +56,10 @@ const rules: Record<string, Record<string, any>> = {
     [MAX_LENGTH]: 20,
   },
 
+  search: {
+    [REQUIRED]: true,
+  },
+
   message: {
     [REQUIRED]: true,
   },

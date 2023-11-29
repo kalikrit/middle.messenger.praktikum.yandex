@@ -12,12 +12,12 @@ export default defineConfig({
     rollupOptions: {
       outDir: resolve(__dirname, 'dist'),
       input: {
-        index: resolve(__dirname, '/index.html')
+        index: resolve(__dirname, '/')
       }
     }
   },
   server: {
     port: 3000,
-    open: 'index.html'
+    open: '/'
   }
 })

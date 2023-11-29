@@ -75,18 +75,7 @@ function set(object: Indexed | unknown, path: string, value: unknown): Indexed |
   return object;
 }
 
-function debounce(fn: (...args: Record<string, any>[]) => void, timeout: number = 300) {
-  let timer:ReturnType<typeof setTimeout>;
-  return (...args: any[]) => {
-    clearTimeout(timer);
-    timer = setTimeout(() => { fn.apply(this, args); }, timeout);
-  };
-}
-
-function formatTime(time: Date) {
-  return new Date(time).toLocaleString();
-}
 
 export {
-  isEqual, set, isArray, debounce, formatTime,
+  set, isEqual, isArray
 };

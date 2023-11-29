@@ -6,7 +6,6 @@ import RegistrationForm from './src/pages/registration/registration'
 import ChatList from './src/pages/chatlist/chatlist'
 import UserSettings from './src/pages/usersettings/usersettings'
 import Error404 from './src/pages/errors/404'
-import Error500 from './src/pages/errors/500'
 import UnAuth from './src/pages/errors/unauth'
 import IndexPage from './src/pages/indexpage/index'
 
@@ -25,14 +24,13 @@ const auth = window.localStorage.getItem('auth');
 
 store.on(StoreEvents.Updated, (prop) => {
   const state: Record<string, any> = store.getState();
+  console.dir('STATE:', state)
   const location = window.location.pathname.slice(1);
 
   if (prop === 'auth') {
     if (Router.instance) {
       router.routes = [];
     }
-    console.log(`state:${JSON.stringify(state)}`)
-    console.dir(router)
 
     if (state.auth) {
 

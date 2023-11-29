@@ -1,57 +1,70 @@
 import Block from '../../utils/Block'
 import validateForm from '../../utils/Validation'
+import UserController from '../../controller/UserController'
+
+const uctl = new UserController();
 
 export default class UserSettings extends Block {
 
     constructor() {
-        super({ 
-          onBlur: (e: Record<string, any>) => {
-            this.validateField(e);
-          },
-         });
-      }
+      super({
+        componentName: "UserSettings",
+        onBlur: (e: Record<string, any>) => {
+          this.validateField(e)
+        },
+        onSubmit: () => {
+          this.onLogout.apply(this)
+          //this.onSubmit.apply(this)
+        }
+      });
+    }
+
+    init():boolean {
+      this.events = {
+        submit: this.onLogout.bind(this),
+      };
+      return true;
+    }
     
-      init():boolean {
-        this.events = {
-          submit: this.onSubmit.bind(this),
-        };
-        return true;
-      }
+    validateField(event: Record<string, any>) {
+      event.preventDefault();
+      const { target } = event;
+      const { name, value } = target;
+      const input = { [name]: value };
+      const errorField: Record<string, any> | boolean = validateForm(input);
+      const { props } = this;
+      const { error } = props.state;
+      const updateError = { ...error, [name]: errorField[name] };
+      this.setProps({
+        ...input,
+        error: updateError,
+      });
+    }
     
-      validateField(event: Record<string, any>) {
-        event.preventDefault();
-        const { target } = event;
-        const { name, value } = target;
-        const input = { [name]: value };
-        const errorField: Record<string, any> | boolean = validateForm(input);
-        const { props } = this;
-        const { error } = props.state;
-        const updateError = { ...error, [name]: errorField[name] };
-        this.setProps({
-          ...input,
-          error: updateError,
-        });
-      }
-    
-      validateForm(form: HTMLFormElement) {
-        const formData = new FormData(form);
-        const formObject = Object.fromEntries(formData.entries());
-        const error = validateForm(formObject);
-    
-        this.setProps({ ...formObject, error });
-      }
-    
-      onSubmit(event: Record<string, any>) {
-        event.preventDefault();
-        const { target } = event;
-        this.validateForm(target);
-      }
-  componentDidUpdate(): boolean {
-    const { state } = this.props;
-    /* eslint no-console: 0 */
-    console.log(state);
-    return true;
-  }
+    validateForm(form: HTMLFormElement) {
+      const formData = new FormData(form);
+      const formObject = Object.fromEntries(formData.entries());
+      const error = validateForm(formObject);
+  
+      this.setProps({ ...formObject, error });
+    }
+  
+    onSubmit(event: Record<string, any>) {
+      event.preventDefault();
+      const { target } = event;
+      this.validateForm(target);
+    }
+
+    onLogout(event: Record<string, any>) {
+      uctl.logout();
+    }
+
+    componentDidUpdate(): boolean {
+      const { state } = this.props;
+      /* eslint no-console: 0 */
+      console.log(state);
+      return true;
+    }
 
   render() {
     const { props } = this;
@@ -59,7 +72,7 @@ export default class UserSettings extends Block {
 
 return (`
 <div class="window">
-    <form action="#" method="POST">
+    <form>
         <div class="usersettings">
             <div>
                 <input type="file"  accept="image/*" name="avatar" id="file" style="display: none;">              
@@ -172,9 +185,17 @@ return (`
             error="${error?.newPassword || ''}"
         }}}
                     </div>
-                    <div class="exit-link">
-                        <a href="/?page=chats">Выйти</a>
-                    </div>
+                    {{{ Button
+                      type="submit"
+                      class="button__orange"
+                      label="Выйти"
+                    }}}
+                    {{{ Button
+                      type="button"
+                      class="button__gray"
+                      label="Назад"
+                      onClick=back
+                    }}}
                 </div>                      
             </div>
         </div>

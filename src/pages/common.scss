@@ -65,6 +65,34 @@ a {
   width: 190px;
   text-decoration: none;
   border-radius: 4px;
+
+  &__orange {
+    background-color: orange;
+    font-weight: bold;
+    margin-top: 2rem;
+    border: none;
+    color: white;
+    cursor: pointer;
+    padding: 6px 8px;
+    height: 30px;
+    width: 190px;
+    text-decoration: none;
+    border-radius: 4px;
+  }
+
+  &__gray {
+    background-color: darkgray;
+    font-weight: bold;
+    margin-top: 2rem;
+    border: none;
+    color: white;
+    cursor: pointer;
+    padding: 6px 8px;
+    height: 30px;
+    width: 190px;
+    text-decoration: none;
+    border-radius: 4px;
+  }
 }
 
 .sugnup-page {
@@ -158,9 +186,31 @@ a {
   color: gray;
   top:10px;
 }
-.message {
+.chat_greet {
   margin-top: 2rem;
   margin-left: 2rem;
+}
+.message {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    margin-bottom: 1rem;
+}
+.button_message {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  width: fit-content;
+  margin-bottom: 1rem;
+}
+.button_message .button {
+  width:2rem;
+  height: 20px;
+  padding:0px;
+  margin-left: 1rem;
+}
+.message-input input {
+  width: 40rem;
 }
 .usersettings {
   display: flex;

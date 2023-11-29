@@ -63,7 +63,7 @@ return (`
     <div class="sidebar">
         <div class="header">Мессенджер Практикум
             <div class="settings">
-                <a href="/?page=uset">
+                <a href="/profile">
                     <svg fill="#000000" height="20px" width="20px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
                     viewBox="0 0 478.703 478.703" xml:space="preserve">
                         <g>
@@ -100,12 +100,12 @@ return (`
         <div class="search">
         <form action="preventDefault()" method="POST">
           {{{ Field
-            id="message"
-            name="message"
+            id="search"
+            name="search"
             type="search"
             placeholder="Поиск"
-            value=state.message
-            error="${error?.message || ''}"
+            value=state.search
+            error="${error?.search || ''}"
             onBlur=onBlur
           }}}
         </form>
@@ -162,7 +162,29 @@ return (`
         </div>
     </div>
     <div class="main">
-        <div class="message">Выберите чат для начала общения</div>
+        <div class="chat_greet">Выберите чат для начала общения</div>
+        <div class="message">
+        <form action="preventDefault()" method="POST">
+          {{{ Field
+            id="message"
+            name="message"
+            type="text"
+            class="message-input"
+            placeholder="Ваше сообщение"
+            value=state.message
+            error="${error?.message || ''}"
+            onBlur=onBlur
+          }}}
+        </form>
+        </div>
+        <div class="button_message">
+        {{{ Button
+            type="button"
+            class="button"
+            label=">"
+            onClick=sendMessage
+        }}}
+        </div>
     </div>
 </div>
 `);

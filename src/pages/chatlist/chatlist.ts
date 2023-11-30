@@ -1,10 +1,12 @@
 import Block from '../../utils/Block'
-import validateForm from '../../utils/Validation';
+import validateForm from '../../utils/Validation'
+import ChatsController from '../../controller/ChatsController'
 
 export default class ChatList extends Block {
 
     constructor() {
-        super({ 
+        super({
+          componentName: 'ChatList',
           onBlur: (e: Record<string, any>) => {
             this.validateField(e);
           },
@@ -15,6 +17,8 @@ export default class ChatList extends Block {
     this.events = {
       submit: this.onSubmit.bind(this),
     };
+    ChatsController.getChats();
+    const chats:object = JSON.parse(window.localStorage.getItem('chats'))
     return true;
   }
 
@@ -48,14 +52,13 @@ export default class ChatList extends Block {
   }
 
   componentDidUpdate(): boolean {
-    const { state } = this.props;
+    const { state, chats } = this
     /* eslint no-console: 0 */
-    console.log(state);
     return true;
   }
 
   render() {
-    const { props } = this;
+    const { props, chats } = this;
     const { error } = props.state;
 
 return (`
@@ -111,6 +114,7 @@ return (`
         </form>
         </div>
         <div class="chats">
+            {{#each chats  }}
             <div class="chat">
                 <div class="avatar"></div>
                 <div class="user">
@@ -119,46 +123,7 @@ return (`
                 </div>
                 <div class="lm-time">21:15</div>
             </div>
-            <div class="chat">
-                <div class="avatar"></div>
-                <div class="user">
-                    Софи Бэл
-                    <div class="last-message">Вы: стикер</div>
-                </div>
-                <div class="lm-time">10:49</div>
-            </div>
-            <div class="chat">
-                <div class="avatar"></div>
-                <div class="user">
-                    Николай Смолов
-                    <div class="last-message">Вечно счастлив</div>
-                </div>
-                <div class="lm-time">14:11</div>
-            </div>
-            <div class="chat">
-                <div class="avatar"></div>
-                <div class="user">
-                    Мария Воскресенская
-                    <div class="last-message">Вы: спасибо</div>
-                </div>
-                <div class="lm-time">12:15</div>
-            </div>
-            <div class="chat">
-                <div class="avatar"></div>
-                <div class="user">
-                    Евгений Качалин
-                    <div class="last-message">Солнечность</div>
-                </div>
-                <div class="lm-time">20:08</div>
-            </div>
-            <div class="chat">
-                <div class="avatar"></div>
-                <div class="user">
-                    Алексей Схоменко
-                    <div class="last-message">Не знаю - почему так</div>
-                </div>
-                <div class="lm-time">20:00</div>
-            </div>
+        {{/each}}  
         </div>
     </div>
     <div class="main">

@@ -1,11 +1,17 @@
 import ApiUser from '../services/user';
 import store from '../utils/Store';
 
+/**
+ * юзер контроллер
+ */
+
+// вспомогательная утилита установки в LS
 const auth = () => {
   store.set('auth', true);
   window.localStorage.setItem('auth', 'true');
 }
 
+// вспомогательная утилита установки в LS
 const logout = () => {
   store.set('auth', false);
   window.localStorage.removeItem('auth');
@@ -66,7 +72,8 @@ class UserController {
     this.api.user()
     .then((data: Record<string, any>) => {
       if (data || data?.status === 200) {
-        store.set('user', JSON.parse(data.response));
+        const chats = JSON.parse(data.response)
+        store.set('user', chats);
       } else {
         logout();
       }

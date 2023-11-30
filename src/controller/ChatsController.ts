@@ -1,7 +1,10 @@
 import ApiChat from '../services/chat.ts';
-import store from '../core/Store';
-import { isArray } from '../core/Utils';
+import store from '../utils/Store.ts';
+import { isArray } from '../utils/Utils.ts';
 
+/**
+ * контроллер чата
+ */
 class ChatsController {
   private api: ApiChat;
 
@@ -12,25 +15,55 @@ class ChatsController {
     this.socket = null;
   }
 
+  public getChats() {
+    this.api.chats()
+      .then((data: Record<string, any>) => {
+        if (data.status === 200) {
+          setTimeout(()=> {
+            store.set('chats', JSON.parse(data.response));
+            window.localStorage.setItem('chats', data.response);
+          }, 0)
+
+        }
+        return true;
+      }).catch((error: Error) => {
+        console.error(`get user chats error: ${error}`);
+      });
+  }
+
+  public getUsers(id: string) {
+    this.api.getUsers(id)
+      .then((data: Record<string, any>) => {
+        if (data.status === 200) {
+          store.set('chatUsers', JSON.parse(data.response));
+        }
+        return true;
+      }).catch((error: Error) => {
+        console.error(`get users for chat error: ${error}`);
+      });
+  }
+
   public createChat(body: Record<string, any>) {
-    this.api.create(body).then((data: Record<string, any>) => {
-      if (data.status === 200) {
-        this.getChats();
-      }
-    }).catch((error) => {
-      console.log(`Failed auth${error}`);
-    });
+    this.api.create(body)
+      .then((data: Record<string, any>) => {
+        if (data.status === 200) {
+          this.getChats();
+        }
+      }).catch((error: Error) => {
+        console.error(`auth error: ${error}`);
+      });
   }
 
   getToken(id: string) {
-    return this.api.getToken(id).then((data: Record<string, any>) => {
-      if (data.status === 200) {
-        return JSON.parse(data.response).token;
-      }
-      return {};
-    }).catch((error) => {
-      console.log(`Token get failed ${error}`);
-    });
+    return this.api.getToken(id)
+      .then((data: Record<string, any>) => {
+        if (data.status === 200) {
+          return JSON.parse(data.response).token;
+        }
+        return {};
+      }).catch((error: Error) => {
+        console.error(`cannot get token: ${error}`);
+      });
   }
 
   getMessages(socket: WebSocket) {
@@ -99,47 +132,28 @@ class ChatsController {
   }
 
   appendUser(users: [string], chatId: string) {
-    this.api.appendUser(users, chatId).then((data: Record<string, any>) => {
-      if (data.status === 200) {
-        this.getUsers(chatId);
-      }
-    }).catch((error) => {
-      console.log(`Failed append user to chat ${error}`);
-    });
+    this.api.appendUser(users, chatId)
+      .then((data: Record<string, any>) => {
+        if (data.status === 200) {
+          this.getUsers(chatId);
+        }
+      }).catch((error: Error) => {
+        console.error(`append user error: ${error}`);
+      });
   }
 
   removeUser(users: [string], chatId: string) {
-    this.api.removeUser(users, chatId).then((data: Record<string, any>) => {
-      if (data.status === 200) {
-        // store.set('chats', JSON.parse(data.response));
-        this.getUsers(chatId);
-      }
-    }).catch((error) => {
-      console.log(`Failed remove user from chat ${error}`);
-    });
+    this.api.removeUser(users, chatId)
+      .then((data: Record<string, any>) => {
+        if (data.status === 200) {
+          // store.set('chats', JSON.parse(data.response));
+          this.getUsers(chatId);
+        }
+      }).catch((error: Error) => {
+        console.error(`remove user from chat error: ${error}`);
+      });
   }
 
-  public getChats() {
-    this.api.chats().then((data: Record<string, any>) => {
-      if (data.status === 200) {
-        store.set('chats', JSON.parse(data.response));
-      }
-      return true;
-    }).catch((error) => {
-      console.log(`Failed get chats from user ${error}`);
-    });
-  }
-
-  public getUsers(id: string) {
-    this.api.getUsers(id).then((data: Record<string, any>) => {
-      if (data.status === 200) {
-        store.set('chatUsers', JSON.parse(data.response));
-      }
-      return true;
-    }).catch((error) => {
-      console.log(`Failed get users for chat ${error}`);
-    });
-  }
 }
 
 export default new ChatsController();

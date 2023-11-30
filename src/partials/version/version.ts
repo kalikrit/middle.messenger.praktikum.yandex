@@ -7,7 +7,7 @@ export default class Version extends Block {
 
   render() {
  return (`
-    <div class="version">Version: 3.5.7 / 29.11.2023</div>
+    <div class="version">Version: 3.5.9 / 30.11.2023</div>
 `);
   }
 }

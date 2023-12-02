@@ -160,11 +160,7 @@ a {
   border-bottom: 1px solid gray;
   padding: 10px 5px;
 }
-.chat:hover {
-  background-color: lightgray;
-  border: 1px solid green;
-  cursor: pointer;
-}
+.chat.active {border: 1px solid green}
 .user {
   color: black;
   margin-left: 5px;
@@ -175,10 +171,29 @@ a {
 }
 .lm-time {
   position: absolute;
-  left: 90%;
+  left: 70%;
   color: gray;
   font-weight: 600;
   font-size: small;
+  margin: -30px;
+}
+.chat-message {
+  width:50vw;
+}
+.row > .lm-time {
+  margin: 0px;
+  margin-left: 100%;
+  width: 120px;
+}
+.chat__dialog {
+  position: absolute;
+  left: 170%;
+  top: 1rem;
+  width: 100%;
+  font-size: 24px;
+}
+.chat__dialog .row {
+  width: 50vw;
 }
 .settings {
   position: absolute;
@@ -186,15 +201,28 @@ a {
   color: gray;
   top:10px;
 }
+.addchat {
+  padding:10px;
+  font-size: 20px;
+}
 .chat_greet {
   margin-top: 2rem;
   margin-left: 2rem;
 }
 .message {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    margin-bottom: 1rem;
+  position:absolute;
+  top:90%;
+  left:160%;
+}
+.message input {
+  width: 50vw;
+  min-height: 30px;
+  font-size: 20px;
+}
+.btn-icon {
+  float: right;
+  margin-top: -35px;
+  margin-right: -50px;
 }
 .button_message {
   display: flex;
@@ -271,4 +299,8 @@ a {
 .error {
   color: red;
   font-size: small;
+}
+.chat-message {
+  color:black;
+  padding-left:1rem;
 }

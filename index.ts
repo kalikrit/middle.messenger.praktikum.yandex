@@ -3,11 +3,13 @@ import * as partials from './src/partials'
 import { register } from './src/utils/Template'
 import LoginForm from './src/pages/login/login'
 import RegistrationForm from './src/pages/registration/registration'
-import ChatList from './src/pages/chatlist/chatlist'
+import Chats from './src/partials/chats/index'
 import UserSettings from './src/pages/usersettings/usersettings'
 import Error404 from './src/pages/errors/404'
 import UnAuth from './src/pages/errors/unauth'
 import IndexPage from './src/pages/indexpage/index'
+import AppendChatModal from './src/pages/chats/modals/appendChatModal'
+import AddUser2Chat from './src/pages/chats/modals/addUser2Chat'
 
 import Router from './src/utils/Router'
 import store, { StoreEvents } from './src/utils/Store';
@@ -35,8 +37,10 @@ store.on(StoreEvents.Updated, (prop) => {
     if (state.auth) {
       router.redirect('', 'main');
       router.use('main', IndexPage)
-      router.use('chats', ChatList);
-      router.use('profile', UserSettings);
+      router.use('chats', Chats);
+      router.use('settings', UserSettings);
+      router.use('createChat', AppendChatModal);
+      router.use('addUser', AddUser2Chat);
 
       userController.getUser();
 

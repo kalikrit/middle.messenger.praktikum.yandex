@@ -21,7 +21,7 @@ class ChatsController {
         if (data.status === 200) {
           setTimeout(()=> {
             store.set('chats', JSON.parse(data.response));
-            window.localStorage.setItem('chats', data.response);
+            //window.localStorage.setItem('chats', data.response);
           }, 0)
 
         }

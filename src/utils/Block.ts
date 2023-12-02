@@ -1,5 +1,6 @@
 import EventBus from './EventBus';
 import { compile, register } from './Template';
+import Router from './Router'
 
 type IProps = Record<string, any>;
 type IEvents = Record<string, (event: Event) => void>
@@ -11,7 +12,7 @@ enum Events {
     FLOW_RENDER = 'flow:render',
 }
 
-export default abstract class Component {
+export default abstract class Block {
   protected events: IEvents = {};
 
   protected domElement:Element | null;
@@ -22,6 +23,8 @@ export default abstract class Component {
 
   protected props: IProps;
 
+  protected router: any;
+
   constructor(props: IProps, children?: Record<string, any>) {
 
     this.domElement = null;
@@ -30,7 +33,8 @@ export default abstract class Component {
     });
     const eventBus = new EventBus();
     this.eventBus = () => eventBus;
-
+    this.router = Router.instance;
+    
     if (children !== null && children !== undefined) this.registerChildComponent(children);
 
     this._registerEvents(eventBus);
@@ -174,5 +178,13 @@ export default abstract class Component {
         return true;
       },
     });
+  }
+  
+  show() {
+    this.getNode().setAttribute('style', 'display');
+  }
+
+  hide() {
+    this.getNode().setAttribute('style', 'display: none');
   }
 }

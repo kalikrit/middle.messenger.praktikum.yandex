@@ -106,7 +106,7 @@ const validateField: Record<string, ICheck> = {
   от 10 до 15 символов, 
   состоит из цифр, может начинается с плюса.
   */
-  [VALID_PHONE]: (value) => !!value.match(/^\+?(\d{1,3})?[- .]?\(?(?:\d{2,3})\)?[- .]?\d\d\d[- .]?\d\d\d\d$/),
+  [VALID_PHONE]: (value) => !!value.match(/^\+?(\d{1,3})?[- .]?\d\d\d?[- .]?\d\d\d?[- .]?\d\d[- .]?\d\d$/),
 
   /**
   латиница или кириллица, 

@@ -1,6 +1,6 @@
-import Block from '../../utils/Block';
-import validateForm from '../../utils/Validation';
-import UserController from '../../controller/UserController';
+import Block from '../../utils/Block'
+import validateForm from '../../utils/Validation'
+import UserController from '../../controller/UserController'
 
 const uctl = new UserController();
 
@@ -71,9 +71,6 @@ export default class LoginForm extends Block {
   }
 
   componentDidUpdate(): boolean {
-    const { state } = this.props;
-    /* eslint no-console: 0 */
-    console.log(state);
     return true;
   }
 

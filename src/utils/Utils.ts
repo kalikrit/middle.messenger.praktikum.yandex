@@ -75,7 +75,10 @@ function messenger_set(object: Indexed | unknown, path: string, value: unknown):
   return object;
 }
 
+function formatTime(time: Date) {
+  return new Date(time).toLocaleString();
+}
 
 export {
-  messenger_set, isEqual, isArray
+  messenger_set, isEqual, isArray, formatTime
 };

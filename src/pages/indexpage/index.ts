@@ -15,7 +15,7 @@ export default class IndexPage extends Block {
      <li><a href="/login">Авторизация</a></li>
      <li><a href="/register">Регистрация</a></li>
      <li><a href="/chats">Список чатов</a></li>
-     <li><a href="/profile">Настройки пользователя</a></li>
+     <li><a href="/settings">Настройки пользователя</a></li>
    </ul>
  </nav>
  {{{ Version }}}

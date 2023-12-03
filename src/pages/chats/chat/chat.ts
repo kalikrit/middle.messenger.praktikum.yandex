@@ -31,6 +31,7 @@ class Chat extends Block {
     let messages: any[] | undefined = [];
 
     const { state } = this.props;
+    const { user } = state;
 
     if (isArray(state.messages)) {
       messages = formatMessages(state.messages, state.user.id);
@@ -43,8 +44,15 @@ ${!state.activeChatId
         ? `
     <div class="chat_greet">Выберите чат для начала общения</div>
     `
-        : `<div class="main_chat">
+        : `
   <div class="dialog chat__dialog">
+    <div class="main_chat">
+    <div class="row  row_gap  row_middle ">
+    <img
+    class='avatar avatar_small' 
+    src='${user?.avatar ? `https://ya-praktikum.tech/api/v2/resources${user.avatar}` : '/public/vite.svg'}' />
+    <h4>{{ state.user.first_name }}</h4>
+  </div>
 ${messages?.map((item) => (`
   <div class="row">
     <div class="${item.author ? 'chat-message sent' : 'chat-message receive'}">

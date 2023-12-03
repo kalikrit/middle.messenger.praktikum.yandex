@@ -1,24 +1,24 @@
-import Block from './src/utils/Block'
-import * as partials from './src/partials'
-import { register } from './src/utils/Template'
-import LoginForm from './src/pages/login/login'
-import RegistrationForm from './src/pages/registration/registration'
-import Chats from './src/partials/chats/index'
-import UserSettings from './src/pages/usersettings/usersettings'
-import Error404 from './src/pages/errors/404'
-import UnAuth from './src/pages/errors/unauth'
-import IndexPage from './src/pages/indexpage/index'
-import AppendChatModal from './src/pages/chats/modals/appendChatModal'
-import AddUser2Chat from './src/pages/chats/modals/addUser2Chat'
+import Block from './src/utils/Block';
+import * as partials from './src/partials';
+import { register } from './src/utils/Template';
+import LoginForm from './src/pages/login/login';
+import RegistrationForm from './src/pages/registration/registration';
+import Chats from './src/partials/chats/index';
+import UserSettings from './src/pages/usersettings/usersettings';
+import Error404 from './src/pages/errors/404';
+import UnAuth from './src/pages/errors/unauth';
+import IndexPage from './src/pages/indexpage/index';
+import AppendChatModal from './src/pages/chats/modals/appendChatModal';
+import AddUser2Chat from './src/pages/chats/modals/addUser2Chat';
 
-import Router from './src/utils/Router'
+import Router from './src/utils/Router';
 import store, { StoreEvents } from './src/utils/Store';
 import UserController from './src/controller/UserController';
 
-import './src/pages/common.scss'
+import './src/pages/common.scss';
 
 Object.entries(partials)
-  .forEach((partial) => register(partial))
+  .forEach((partial) => register(partial));
 
 const main = document.querySelector('#main') || document.createElement('div');
 const router = new Router(main);
@@ -35,25 +35,23 @@ store.on(StoreEvents.Updated, (prop) => {
     }
 
     if (state.auth) {
-      router.redirect('', 'main');
-      router.use('main', IndexPage)
+      router.redirect('', 'chats');
+      router.use('main', IndexPage);
       router.use('chats', Chats);
       router.use('settings', UserSettings);
       router.use('createChat', AppendChatModal);
       router.use('addUser', AddUser2Chat);
 
       userController.getUser();
-
-      return;
     } else {
       router.redirect('', 'login');
-      router.use('main', IndexPage)
+      router.use('main', IndexPage);
       router.use('login', LoginForm);
       router.use('register', RegistrationForm);
     }
 
     router.error('401', UnAuth);
-    //router.error('404', Error404);
+    // router.error('404', Error404);
   }
 
   if (router._currentRoute && !router.getRoute(location)) {

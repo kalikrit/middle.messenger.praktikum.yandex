@@ -39,6 +39,7 @@ class UserController {
         }
       })
       .catch((error) => {
+        /* eslint no-console: 0 */
         console.error(`auth user error: ${error}`);
       });
   }
@@ -50,6 +51,7 @@ class UserController {
         logout();
       })
       .catch((error) => {
+        /* eslint no-console: 0 */
         console.error(`logout error: ${error}`);
       });
   }
@@ -59,10 +61,12 @@ class UserController {
     this.api.signup(formObject)
       .then((data: Record<string, any>) => {
         if (data.status !== 200) {
+          /* eslint no-console: 0 */
           console.error('registration error');
         }
       })
       .catch((error) => {
+        /* eslint no-console: 0 */
         console.error(`error: ${error}`);
       });
   }
@@ -80,6 +84,7 @@ class UserController {
         return true;
       })
       .catch((error) => {
+        /* eslint no-console: 0 */
         console.error(`error: ${error}`);
       });
   }
@@ -92,6 +97,7 @@ class UserController {
         return true;
       })
       .catch((error) => {
+        /* eslint no-console: 0 */
         console.error(`edit user profile error: ${error}`);
       });
   }
@@ -104,6 +110,7 @@ class UserController {
         return true;
       })
       .catch((error) => {
+        /* eslint no-console: 0 */
         console.error(`edit password error: ${error}`);
       });
   }
@@ -115,6 +122,7 @@ class UserController {
         this.getUser();
       })
       .catch((error) => {
+        /* eslint no-console: 0 */
         console.error(`set user avatar error: ${error}`);
       });
   }

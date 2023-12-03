@@ -137,6 +137,7 @@ class ChatsController {
           this.getUsers(chatId);
         }
       }).catch((error: Error) => {
+        /* eslint no-console: 0 */
         console.error(`append user error: ${error}`);
       });
   }
@@ -149,6 +150,7 @@ class ChatsController {
           this.getUsers(chatId);
         }
       }).catch((error: Error) => {
+        /* eslint no-console: 0 */
         console.error(`remove user from chat error: ${error}`);
       });
   }

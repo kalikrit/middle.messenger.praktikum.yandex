@@ -1,4 +1,4 @@
-import Block from '../../../../utils/Block'
+import Block from '../../../../utils/Block';
 
 interface IPropsChatUser {
   user: string,
@@ -23,7 +23,7 @@ export default class ChatUser extends Block {
   }
 
   render() {
-return `
+    return `
   <div>
     <div class="avatar">{{avatar}}</div>
     <div class="user">

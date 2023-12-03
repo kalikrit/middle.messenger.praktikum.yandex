@@ -19,28 +19,28 @@ export default class ApiChat {
   getToken(id: string) {
     return this.fetch.post(
       `${this.baseUrl}/api/v2/chats/token/${id}`,
-      { headers: this.headers, withCredentials: true }
+      { headers: this.headers, withCredentials: true },
     );
   }
 
   chats() {
     return this.fetch.get(
       `${this.baseUrl}/api/v2/chats`,
-      { headers: this.headers, withCredentials: true }
+      { headers: this.headers, withCredentials: true },
     );
   }
-  
+
   getUsers(id: string) {
     return this.fetch.get(
       `${this.baseUrl}/api/v2/chats/${id}/users`,
-      { headers: this.headers, withCredentials: true }
+      { headers: this.headers, withCredentials: true },
     );
   }
 
   create(data: Record<string, any>) {
     return this.fetch.post(
       `${this.baseUrl}/api/v2/chats`,
-      { headers: this.headers, data, withCredentials: true }
+      { headers: this.headers, data, withCredentials: true },
     );
   }
 
@@ -51,14 +51,14 @@ export default class ApiChat {
   appendUser(users: [string], chatId: string) {
     return this.fetch.put(
       `${this.baseUrl}/api/v2/chats/users`,
-      { headers: this.headers, data: { users, chatId }, withCredentials: true }
+      { headers: this.headers, data: { users, chatId }, withCredentials: true },
     );
   }
 
   removeUser(users: [string], chatId: string) {
     return this.fetch.delete(
       `${this.baseUrl}/api/v2/chats/users`,
-      { headers: this.headers, data: { users, chatId }, withCredentials: true }
+      { headers: this.headers, data: { users, chatId }, withCredentials: true },
     );
   }
 }

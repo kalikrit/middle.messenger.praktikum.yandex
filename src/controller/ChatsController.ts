@@ -19,11 +19,10 @@ class ChatsController {
     this.api.chats()
       .then((data: Record<string, any>) => {
         if (data.status === 200) {
-          setTimeout(()=> {
+          setTimeout(() => {
             store.set('chats', JSON.parse(data.response));
-            //window.localStorage.setItem('chats', data.response);
-          }, 0)
-
+            // window.localStorage.setItem('chats', data.response);
+          }, 0);
         }
         return true;
       }).catch((error: Error) => {
@@ -153,7 +152,6 @@ class ChatsController {
         console.error(`remove user from chat error: ${error}`);
       });
   }
-
 }
 
 export default new ChatsController();

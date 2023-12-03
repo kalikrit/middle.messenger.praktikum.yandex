@@ -1,6 +1,6 @@
-import Block from '../../utils/Block'
-import validateForm from '../../utils/Validation'
-import UserController from '../../controller/UserController'
+import Block from '../../utils/Block';
+import validateForm from '../../utils/Validation';
+import UserController from '../../controller/UserController';
 
 const uctl = new UserController();
 
@@ -12,15 +12,15 @@ export default class LoginForm extends Block {
   };
 
   constructor(props: Record<string, string | number>) {
-    super({ 
+    super({
       onBlur: (e: Record<string, any>) => {
         this.validateField(e);
       },
       onRegister: () => {
-        this.onRegister.apply(this)
+        this.onRegister.apply(this);
       },
-      ...props
-     });
+      ...props,
+    });
     this.setProps(this.initial);
   }
 
@@ -61,7 +61,7 @@ export default class LoginForm extends Block {
     const formObject = Object.fromEntries(formData.entries());
     const valid = this.validateForm(target);
 
-    if(!valid) return;
+    if (!valid) return;
 
     uctl.authUser(formObject);
   }
@@ -78,7 +78,7 @@ export default class LoginForm extends Block {
     const { props } = this;
     const { error } = props.state;
 
-return (`
+    return (`
 <div class="window">
   <div class="card">
     <h4>Войти в мессенджер</h4>

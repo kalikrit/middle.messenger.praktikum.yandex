@@ -1,12 +1,12 @@
 import EventBus from './EventBus';
-import { messenger_set } from './Utils';
+import { messengerSet } from './Utils';
 import { Indexed } from '../types/types';
 
 export enum StoreEvents {
     Updated = 'updated',
 }
 
-// наследуем Store от EventBus, 
+// наследуем Store от EventBus,
 // чтобы его методы были сразу доступны у экземпляра Store
 class Store extends EventBus {
   private state: Indexed;
@@ -30,7 +30,7 @@ class Store extends EventBus {
   }
 
   public set(path: string, value: unknown) {
-    messenger_set(this.state, path, value);
+    messengerSet(this.state, path, value);
 
     // метод EventBus
     this.emit(StoreEvents.Updated, path);

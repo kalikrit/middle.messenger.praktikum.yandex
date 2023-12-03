@@ -1,4 +1,4 @@
-import Block from '../../utils/Block.ts'
+import Block from '../../utils/Block.ts';
 import template from './chats.hbs?raw';
 import { ChatUsers } from './chatusers';
 import { Chat } from './chat/index';
@@ -38,7 +38,7 @@ class Chats extends Block {
   }
 
   createChat() {
-    this.router.go('createChat')
+    this.router.go('createChat');
   }
 
   componentDidUpdate(): boolean {

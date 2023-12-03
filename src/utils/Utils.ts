@@ -48,7 +48,7 @@ function isString(value: unknown): value is string {
   return Object.prototype.toString.call(value) === '[object String]';
 }
 
-function messenger_set(object: Indexed | unknown, path: string, value: unknown): Indexed | unknown {
+function messengerSet(object: Indexed | unknown, path: string, value: unknown): Indexed | unknown {
   if (!isPlainObject(object)) {
     return object;
   }
@@ -80,5 +80,5 @@ function formatTime(time: Date) {
 }
 
 export {
-  messenger_set, isEqual, isArray, formatTime
+  messengerSet, isEqual, isArray, formatTime,
 };

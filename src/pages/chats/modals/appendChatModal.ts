@@ -1,5 +1,5 @@
-import Block from '../../../utils/Block'
-import ChatsController from '../../../controller/ChatsController'
+import Block from '../../../utils/Block';
+import ChatsController from '../../../controller/ChatsController';
 
 export default class AppendChatModal extends Block {
   protected initial = {
@@ -27,7 +27,6 @@ export default class AppendChatModal extends Block {
   onSubmit(event: Record<string, any>) {
     event.preventDefault();
     const { target } = event;
-    const { toggle } = this.props;
     const formData = new FormData(target);
     const formObject = Object.fromEntries(formData.entries());
     ChatsController.createChat(formObject);

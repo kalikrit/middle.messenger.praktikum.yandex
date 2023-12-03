@@ -1,6 +1,6 @@
-import Block from '../../../utils/Block'
-import ChatsController from '../../../controller/ChatsController'
-import connect from '../../../utils/Connect'
+import Block from '../../../utils/Block';
+import ChatsController from '../../../controller/ChatsController';
+import connect from '../../../utils/Connect';
 import { Indexed, User } from '../../../types/types';
 
 class AddUser2Chat extends Block {
@@ -25,7 +25,6 @@ class AddUser2Chat extends Block {
     this.setProps(this.initial);
   }
 
-  
   componentDidUpdate(): boolean {
     const { state } = this.props;
     /* eslint no-console: 0 */

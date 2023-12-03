@@ -19,7 +19,8 @@ class Chat extends Block {
   constructor(props:IPropsChat) {
     super(
       { componentName: 'Chat', ...props },
-      { FormMessage });
+      { FormMessage },
+    );
   }
 
   componentDidUpdate(): boolean {
@@ -30,7 +31,6 @@ class Chat extends Block {
     let messages: any[] | undefined = [];
 
     const { state } = this.props;
-    const { user } = state;
 
     if (isArray(state.messages)) {
       messages = formatMessages(state.messages, state.user.id);
@@ -38,12 +38,12 @@ class Chat extends Block {
       messages.push(...formatMessages([state.messages], state.user.id));
     }
 
-return (`
+    return (`
 ${!state.activeChatId
-  ? `
+        ? `
     <div class="chat_greet">Выберите чат для начала общения</div>
     `
-  : `<div class="main_chat">
+        : `<div class="main_chat">
   <div class="dialog chat__dialog">
 ${messages?.map((item) => (`
   <div class="row">

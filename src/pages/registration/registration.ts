@@ -1,16 +1,15 @@
-import Block from '../../utils/Block'
+import Block from '../../utils/Block';
 import validateForm from '../../utils/Validation';
-import UserController from '../../controller/UserController'
+import UserController from '../../controller/UserController';
 
 const uctl = new UserController();
 export default class RegistrationForm extends Block {
-
   constructor() {
-    super({ 
+    super({
       onBlur: (e: Record<string, any>) => {
         this.validateField(e);
       },
-     });
+    });
   }
 
   init():boolean {
@@ -50,7 +49,7 @@ export default class RegistrationForm extends Block {
     const formObject = Object.fromEntries(formData.entries());
     const valid = this.validateForm(target);
 
-    if(!valid) return;
+    if (!valid) return;
 
     uctl.signUp(formObject);
   }
@@ -63,7 +62,7 @@ export default class RegistrationForm extends Block {
     const { props } = this;
     const { error } = props.state;
 
-return (`
+    return (`
 <div class="window">
     <div class="card">
         <h4>Регистрация</h4>

@@ -1,4 +1,4 @@
-import Block from '../../utils/Block'
+import Block from '../../utils/Block';
 
 export default class Button extends Block {
   constructor(props: Array<Record<string, any>>) {
@@ -6,14 +6,15 @@ export default class Button extends Block {
   }
 
   init() {
-    const { props } = this
+    const { props } = this;
     this.events = {
-      click: props.onClick
-    }
-    return true
+      click: props.onClick,
+    };
+    return true;
   }
+
   render() {
- return (`
+    return (`
 <button
  type="{{ type }}"
  class="{{ class }}"

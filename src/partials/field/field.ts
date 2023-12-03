@@ -1,7 +1,6 @@
 import Block from '../../utils/Block';
 
 export default class Field extends Block {
-  
   constructor(props: Array<Record<string, any>>) {
     super({ componentName: 'Field', ...props });
   }

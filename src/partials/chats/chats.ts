@@ -1,5 +1,5 @@
 import template from './chats.hbs?raw';
-import Block from '../../utils/Block'
+import Block from '../../utils/Block';
 
 class Chats extends Block {
   constructor() {

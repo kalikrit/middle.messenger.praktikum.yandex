@@ -1,13 +1,12 @@
 import Block from '../../utils/Block';
 
 export default class IndexPage extends Block {
-
   constructor() {
     super({ componentName: 'IndexPage' });
   }
 
   render() {
- return (`
+    return (`
  <div class="window">
  <h2>Мессенджер Практикум</h2>
  <nav>

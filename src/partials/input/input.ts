@@ -12,19 +12,18 @@ interface IPropsInput {
 }
 
 export default class Input extends Block {
-  
   constructor(props: IPropsInput) {
     super({ componentName: 'Input', ...props });
   }
-  
+
   // инициализация, плюс слушатели
   init() {
-    const { props } = this
+    const { props } = this;
     this.events = {
-      blur: props.onBlur
-    }
+      blur: props.onBlur,
+    };
 
-    return true
+    return true;
   }
 
   render() {

@@ -53,6 +53,8 @@ export default class FormMessage extends Block {
     const formData = new FormData(target);
     const formObject: Record<string, any> = Object.fromEntries(formData.entries());
 
+    if (formObject.message.length < 2) return;
+
     ChatsController.appendMessages(formObject.message);
   }
 

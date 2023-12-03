@@ -61,7 +61,7 @@ const rules: Record<string, Record<string, any>> = {
   },
 
   message: {
-    [REQUIRED]: true,
+    [MIN_LENGTH]: 2,
   },
 
   first_name: {

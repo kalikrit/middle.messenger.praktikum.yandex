@@ -1,6 +1,7 @@
 export { Chats } from '../pages/chats/index';
 export { Field } from './field';
 export { Button } from './button';
+export { ButtonBack } from './buttonBack';
 export { Input } from './input';
 export { Version } from './version';
 

@@ -18,6 +18,7 @@ export default class Button extends Block {
 <button
  type="{{ type }}"
  class="{{ class }}"
+ data-id="{{ data-id }}"
 >
 {{ label }}
 </button>

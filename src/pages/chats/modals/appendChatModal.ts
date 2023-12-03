@@ -64,12 +64,7 @@ export default class AppendChatModal extends Block {
       class="button"
       label="Создать"
     }}}
-    {{{ Button
-      type="button"
-      class="button__gray"
-      label="Назад"
-      onClick=back
-    }}}
+    {{{ ButtonBack }}}
 </form>
 </div>
 </div>

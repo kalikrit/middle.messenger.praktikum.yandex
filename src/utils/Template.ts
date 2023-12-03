@@ -1,7 +1,6 @@
-import Handlebars, { HelperOptions } from 'handlebars'
+import Handlebars, { HelperOptions } from 'handlebars';
 
 export function compile(template:string, props: object) {
-
   const children = [] as Array<any>;
 
   const data = {
@@ -17,25 +16,24 @@ export function compile(template:string, props: object) {
 }
 
 export function register([name, Component]: [string, any]) {
-
   Handlebars.registerHelper(name, ({ hash, data, fn }: HelperOptions) => {
     const component = new Component(hash);
     /* eslint no-param-reassign: 0 */
     (data.root.__children = data.root.__children || [])
-    .push({
-      component,
-      embed(fragment: DocumentFragment) {
-        const stub = fragment.querySelector(`#${name}`);
+      .push({
+        component,
+        embed(fragment: DocumentFragment) {
+          const stub = fragment.querySelector(`#${name}`);
 
-        if (!stub) {
-          return;
-        }
+          if (!stub) {
+            return;
+          }
 
-        component.getNode()?.append(...Array.from(stub.childNodes));
+          component.getNode()?.append(...Array.from(stub.childNodes));
 
-        stub.replaceWith(component.getNode());
-      },
-    });
+          stub.replaceWith(component.getNode());
+        },
+      });
 
     const contents = fn ? fn(this) : '';
 

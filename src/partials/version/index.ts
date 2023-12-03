@@ -1,1 +1,1 @@
-export { default as Version } from './version'
+export { default as Version } from './version';

@@ -14,5 +14,5 @@
     "allowImportingTsExtensions": true,
     "allowSyntheticDefaultImports": true
   },
-  "include": ["src"]
+  "include": ["src", "types/hbs.d.ts"]
 } 

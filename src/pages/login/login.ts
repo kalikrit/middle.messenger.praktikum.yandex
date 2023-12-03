@@ -1,5 +1,8 @@
 import Block from '../../utils/Block';
 import validateForm from '../../utils/Validation';
+import UserController from '../../controller/UserController';
+
+const uctl = new UserController();
 
 export default class LoginForm extends Block {
   protected initial = {
@@ -8,12 +11,16 @@ export default class LoginForm extends Block {
     error: {},
   };
 
-  constructor() {
-    super({ 
+  constructor(props: Record<string, string | number>) {
+    super({
       onBlur: (e: Record<string, any>) => {
         this.validateField(e);
       },
-     });
+      onRegister: () => {
+        this.onRegister.apply(this);
+      },
+      ...props,
+    });
     this.setProps(this.initial);
   }
 
@@ -39,24 +46,31 @@ export default class LoginForm extends Block {
     });
   }
 
-  validateForm(form: HTMLFormElement) {
-    const formData = new FormData(form);
-    const formObject = Object.fromEntries(formData.entries());
+  validateForm(formObject: object) {
     const error = validateForm(formObject);
-
     this.setProps({ ...formObject, error });
+
+    return Object.keys(error).length === 0;
   }
 
   onSubmit(event: Record<string, any>) {
     event.preventDefault();
     const { target } = event;
-    this.validateForm(target);
+
+    const formData = new FormData(target);
+    const formObject = Object.fromEntries(formData.entries());
+    const valid = this.validateForm(target);
+
+    if (!valid) return;
+
+    uctl.authUser(formObject);
+  }
+
+  onRegister() {
+    this.router.go('register');
   }
 
   componentDidUpdate(): boolean {
-    const { state } = this.props;
-    /* eslint no-console: 0 */
-    console.log(state);
     return true;
   }
 
@@ -64,11 +78,11 @@ export default class LoginForm extends Block {
     const { props } = this;
     const { error } = props.state;
 
-return (`
+    return (`
 <div class="window">
   <div class="card">
     <h4>Войти в мессенджер</h4>
-    <form action="preventDefault()" method="POST">
+    <form>
       <div class="input-box">
       {{{ Field 
         name="login"
@@ -102,7 +116,7 @@ return (`
       }}}
     </form>
     <div>
-      <a href="/?page=register">Ещё не зарегистрированы?</a>
+      <a href="/register">Ещё не зарегистрированы?</a>
     </div>
   </div>
   {{{ Version }}}

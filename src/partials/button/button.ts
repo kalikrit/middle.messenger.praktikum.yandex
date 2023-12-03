@@ -5,11 +5,20 @@ export default class Button extends Block {
     super({ componentName: 'Button', ...props });
   }
 
+  init() {
+    const { props } = this;
+    this.events = {
+      click: props.onClick,
+    };
+    return true;
+  }
+
   render() {
- return (`
+    return (`
 <button
  type="{{ type }}"
  class="{{ class }}"
+ data-id="{{ data-id }}"
 >
 {{ label }}
 </button>

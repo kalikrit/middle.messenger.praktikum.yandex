@@ -1,5 +1,6 @@
 import EventBus from './EventBus';
 import { compile, register } from './Template';
+import Router from './Router';
 
 type IProps = Record<string, any>;
 type IEvents = Record<string, (event: Event) => void>
@@ -11,7 +12,7 @@ enum Events {
     FLOW_RENDER = 'flow:render',
 }
 
-export default abstract class Component {
+export default class Block {
   protected events: IEvents = {};
 
   protected domElement:Element | null;
@@ -22,14 +23,16 @@ export default abstract class Component {
 
   protected props: IProps;
 
-  constructor(props: IProps, children?: Record<string, any>) {
+  protected router: any;
 
+  constructor(props: IProps, children?: Record<string, any>) {
     this.domElement = null;
     this.props = this._makePropsProxy({
-       ...props, state: {} 
+      ...props, state: {},
     });
     const eventBus = new EventBus();
     this.eventBus = () => eventBus;
+    this.router = Router.instance;
 
     if (children !== null && children !== undefined) this.registerChildComponent(children);
 
@@ -80,12 +83,11 @@ export default abstract class Component {
     this.eventBus().emit(Events.FLOW_CDU);
   };
 
-  protected registerChildComponent(children: Record<string, Component>):void {
+  protected registerChildComponent(children: Record<string, Block>):void {
     for (const child of Object.entries(children)) register(child);
   }
 
   public getNode(): Element {
-
     if (!this.domElement) this._render();
 
     return this.domElement as Element;
@@ -112,12 +114,11 @@ export default abstract class Component {
   }
 
   _unmountComponent() {
-
     if (this.domElement) {
       this._componentWillUnmount();
       this._removeListeners();
 
-    if (this.children) {
+      if (this.children) {
         this.children.forEach(({ component }) => component.unmountComponent());
       }
     }
@@ -128,7 +129,6 @@ export default abstract class Component {
   }
 
   _removeListeners() {
-
     if (this.events) {
       Object.entries(this.events).forEach(([event, callback]) => {
         this.domElement?.removeEventListener(event, callback);
@@ -139,7 +139,7 @@ export default abstract class Component {
   }
 
   _attachListener() {
-    const addEventListener = (element: Component, event: string, cb: any) => {
+    const addEventListener = (element: Block, event: string, cb: any) => {
       element.getNode().addEventListener(event, cb);
     };
 
@@ -161,7 +161,6 @@ export default abstract class Component {
   }
 
   private _makePropsProxy<T extends Record<string, any>>(props: T) {
-    
     return new Proxy(props, {
       set(target, prop, value) {
         /* eslint no-param-reassign: 0 */
@@ -174,5 +173,13 @@ export default abstract class Component {
         return true;
       },
     });
+  }
+
+  show() {
+    this.getNode().setAttribute('style', 'display');
+  }
+
+  hide() {
+    this.getNode().setAttribute('style', 'display: none');
   }
 }

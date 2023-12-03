@@ -1,14 +1,15 @@
-import Block from '../../utils/Block'
+import Block from '../../utils/Block';
 import validateForm from '../../utils/Validation';
+import UserController from '../../controller/UserController';
 
+const uctl = new UserController();
 export default class RegistrationForm extends Block {
-
   constructor() {
-    super({ 
+    super({
       onBlur: (e: Record<string, any>) => {
         this.validateField(e);
       },
-     });
+    });
   }
 
   init():boolean {
@@ -33,24 +34,27 @@ export default class RegistrationForm extends Block {
     });
   }
 
-  validateForm(form: HTMLFormElement) {
-    const formData = new FormData(form);
-    const formObject = Object.fromEntries(formData.entries());
+  validateForm(formObject: object) {
     const error = validateForm(formObject);
-
     this.setProps({ ...formObject, error });
+
+    return Object.keys(error).length === 0;
   }
 
   onSubmit(event: Record<string, any>) {
     event.preventDefault();
     const { target } = event;
-    this.validateForm(target);
+
+    const formData = new FormData(target);
+    const formObject = Object.fromEntries(formData.entries());
+    const valid = this.validateForm(target);
+
+    if (!valid) return;
+
+    uctl.signUp(formObject);
   }
 
   componentDidUpdate(): boolean {
-    const { state } = this.props;
-    /* eslint no-console: 0 */
-    console.log(state);
     return true;
   }
 
@@ -58,7 +62,7 @@ export default class RegistrationForm extends Block {
     const { props } = this;
     const { error } = props.state;
 
-return (`
+    return (`
 <div class="window">
     <div class="card">
         <h4>Регистрация</h4>
@@ -154,7 +158,7 @@ return (`
             }}}
         </form>
         <div>
-            <a href="/?page=login">Войти</a>
+            <a href="/login">Войти</a>
         </div>
     </div>
     {{{ Version }}}

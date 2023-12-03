@@ -23,6 +23,7 @@ class AddUser2Chat extends Block {
     });
 
     this.setProps(this.initial);
+    console.log('STATE', props.state);
   }
 
   componentDidUpdate(): boolean {
@@ -40,11 +41,11 @@ class AddUser2Chat extends Block {
 <div class="window">
   <div class="card">
     <h2>Добавить пользователя к чату</h2>
-    <ul class="flat-list">
+    <ul>
     ${users.length ? users.map((user: User) => `
-        <li class="">
+        <li>
         {{{ Button
-          class="btn btn_full btn_plain"
+          class="button"
           label="${user.login}" 
           onClick=addUser 
           data-id="${user.id}"

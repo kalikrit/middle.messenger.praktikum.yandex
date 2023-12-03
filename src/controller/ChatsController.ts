@@ -108,17 +108,21 @@ class ChatsController {
     socket.addEventListener('message', (event) => {
       /* eslint no-console: 0 */
       console.log('Получены данные', event.data);
+      try {
+        const data = JSON.parse(event.data);
 
-      const data = JSON.parse(event.data);
-
-      if (isArray(data)) {
-        const sort = (a:Record<string, any>, b: Record<string, any>) => (b.time - a.time ? 1 : -1);
-        const sortedMessages = data.sort(sort);
-        messages.push(...sortedMessages);
-        store.set('messages', [...messages]);
-      } else {
-        messages.push(data);
-        store.set('messages', [...messages]);
+        if (isArray(data)) {
+          // eslint-disable-next-line max-len
+          const sort = (a:Record<string, any>, b: Record<string, any>) => (b.time - a.time ? 1 : -1);
+          const sortedMessages = data.sort(sort);
+          messages.push(...sortedMessages);
+          store.set('messages', [...messages]);
+        } else {
+          messages.push(data);
+          store.set('messages', [...messages]);
+        }
+      } catch (e) {
+        console.error(`ERROR while parsing json: ${e}`);
       }
     });
 

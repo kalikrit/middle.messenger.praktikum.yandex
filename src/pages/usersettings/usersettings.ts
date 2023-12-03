@@ -13,18 +13,16 @@ class UserSettings extends Block {
       onBlur: (e: Record<string, any>) => {
         this.validateField(e);
       },
-      onLogout: () => {
-        this.onLogout.apply(this);
-      },
-      onSettings: () => {
-        this.onSettings.apply(this);
-      },
-
-      onChangePassword: () => {
-        this.onChangePassword.apply(this);
-      },
       ...props,
     });
+  }
+
+  init():boolean {
+    this.events = {
+      submit: this.onSubmit.bind(this),
+      click: this.changeAvatar.bind(this),
+    };
+    return true;
   }
 
   validateField(event: Record<string, any>) {
@@ -40,13 +38,6 @@ class UserSettings extends Block {
       ...input,
       error: updateError,
     });
-  }
-
-  init():boolean {
-    this.events = {
-      submit: this.onSubmit.bind(this),
-    };
-    return true;
   }
 
   validateForm(formObject: object) {
@@ -72,31 +63,29 @@ class UserSettings extends Block {
     return true;
   }
 
-  onLogout() {
-    uctl.logout();
-  }
-
-  onSettings() {
-    this.router.go('settings');
-  }
-
-  onChangePassword() {
-    this.router.go('password');
+  changeAvatar() {
+    this.router.go('changeAvatar');
   }
 
   render() {
     const { props } = this;
     const { error } = props.state;
+    const { user = {} } = props.state;
 
     return (`
     <div class="window">
     <form>
         <div class="usersettings">
             <div>
-                <input type="file"  accept="image/*" name="avatar" id="file" style="display: none;">              
-                <div class="avatar"></div>
+            <div class="avatar">
+<img
+ class='avatar'
+ src='${user?.avatar ? `https://ya-praktikum.tech/api/v2/resources${user.avatar}` : '/ava.png'}'
+ onClick=changeAvatar
+ /> 
             </div>
-            <div>Ваше имя</div>
+            </div>
+            <div>{{state.first_name}}</div>
             <div>
                 <div class="row">
                 <div>Почта</div>
@@ -203,11 +192,7 @@ class UserSettings extends Block {
             error="${error?.newPassword || ''}"
         }}}
                     </div>
-                    {{{ Button
-                      type="submit"
-                      class="button__orange"
-                      label="Выйти"
-                    }}}
+                    {{{ ButtonExit }}}
                     {{{ ButtonBack }}}
                 </div>                      
             </div>

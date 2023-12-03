@@ -52,8 +52,6 @@ ${!state.activeChatId
     class='avatar avatar_small' 
     src='${user?.avatar ? `https://ya-praktikum.tech/api/v2/resources${user.avatar}` : '/public/vite.svg'}' />
     <h4>{{ state.user.first_name }}</h4>
-    <a href="/addUser">+добавить пользователя</a>
-    <a href="deleteChat(${state.activeChatId})">удалить чат</a>
   </div>
 ${messages?.map((item) => (`
   <div class="row">

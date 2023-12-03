@@ -5,6 +5,7 @@ import handlebars from 'vite-plugin-handlebars';
 export default defineConfig({
   plugins: [
     handlebars({
+      root: './src',
       partialDirectory: resolve(__dirname, 'src/partials'),
       context: { global: 'global' },
     }),

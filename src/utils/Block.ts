@@ -12,7 +12,7 @@ enum Events {
     FLOW_RENDER = 'flow:render',
 }
 
-export default abstract class Block {
+export default class Block {
   protected events: IEvents = {};
 
   protected domElement:Element | null;

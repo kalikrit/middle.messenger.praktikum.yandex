@@ -116,7 +116,7 @@ export default class LoginForm extends Block {
       }}}
     </form>
     <div>
-      <a href="/register">Ещё не зарегистрированы?</a>
+      <a href="/sign-up">Ещё не зарегистрированы?</a>
     </div>
   </div>
   {{{ Version }}}

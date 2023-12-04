@@ -29,16 +29,11 @@ export default class ChangeAvatar extends Block {
   onSubmit(event: Record<string, any>) {
     event.preventDefault();
     const { target } = event;
-    const { props: { toggle } } = this;
     const formData = new FormData(target);
     uctl.avatar(formData);
-    toggle();
   }
 
   componentDidUpdate(): boolean {
-    const { state } = this.props;
-    /* eslint no-console: 0 */
-    console.log(state);
     return true;
   }
 

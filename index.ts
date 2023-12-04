@@ -36,9 +36,8 @@ store.on(StoreEvents.Updated, (prop) => {
     }
 
     if (state.auth) {
-      router.redirect('', 'chats');
-      router.use('main', IndexPage);
-      router.use('chats', Chats);
+      router.redirect('', 'messenger');
+      router.use('messenger', Chats);
       router.use('settings', UserSettings);
       router.use('createChat', AppendChatModal);
       router.use('addUser', AddUser2Chat);
@@ -47,9 +46,8 @@ store.on(StoreEvents.Updated, (prop) => {
       userController.getUser();
     } else {
       router.redirect('', 'login');
-      router.use('main', IndexPage);
       router.use('login', LoginForm);
-      router.use('register', RegistrationForm);
+      router.use('sign-up', RegistrationForm);
     }
 
     router.error('401', UnAuth);

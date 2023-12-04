@@ -254,6 +254,10 @@ a {
   background-color: #dddada;
   border-radius: 50%;
   display: inline-block;
+
+  &__settings {
+    cursor: pointer;
+  }
 }
 .row {
   display: flex;

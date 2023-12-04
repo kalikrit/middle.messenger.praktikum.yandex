@@ -79,9 +79,8 @@ class UserSettings extends Block {
             <div>
             <div class="avatar">
 <img
- class='avatar'
+ class='avatar__settings'
  src='${user?.avatar ? `https://ya-praktikum.tech/api/v2/resources${user.avatar}` : '/ava.png'}'
- onClick=changeAvatar
  /> 
             </div>
             </div>

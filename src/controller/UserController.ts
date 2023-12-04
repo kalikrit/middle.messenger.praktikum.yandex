@@ -76,8 +76,8 @@ class UserController {
     this.api.user()
       .then((data: Record<string, any>) => {
         if (data.status === 200) {
-          const chats = JSON.parse(data.response);
-          store.set('user', chats);
+          const user = JSON.parse(data.response);
+          store.set('user', user);
         } else {
           logout();
         }

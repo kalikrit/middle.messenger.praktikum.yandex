@@ -51,7 +51,7 @@ export default class ApiUser {
   // edit user info
   profile(data: Record<string, any>) {
     return this.fetch.put(
-      `${this.baseUrl}/api/v2/user/settings`,
+      `${this.baseUrl}/api/v2/user/profile`,
       { headers: this.headers, data, withCredentials: true },
     );
   }

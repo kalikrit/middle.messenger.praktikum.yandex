@@ -13,7 +13,7 @@ export default class ButtonBack extends Block {
   }
 
   onClick() {
-    this.router.go('chats');
+    this.router.go('messenger');
   }
 
   render() {

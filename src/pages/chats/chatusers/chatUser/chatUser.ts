@@ -5,11 +5,15 @@ interface IPropsChatUser {
   message: string,
   time: string,
   unread: string,
+  avatar: string,
 }
 
 export default class ChatUser extends Block {
   constructor(props:IPropsChatUser) {
-    super({ name: 'ChatUser', ...props });
+    super({
+      componentName: 'ChatUser',
+      ...props,
+    });
   }
 
   init() {
@@ -23,14 +27,18 @@ export default class ChatUser extends Block {
   }
 
   render() {
+    const { props } = this;
+    const { avatar } = props;
     return `
   <div>
-    <div class="avatar">{{avatar}}</div>
+    <img class='avatar__settings'
+    src='{{ avatar }}' style="border-radius: 50%; height: 50px"
+    />     
     <div class="user">
     {{ title }}
-    <div class="last-message">{{last_message.content}}</div>
+    <div class="last-message">{{ last_message.content }}</div>
     </div>
-    <time class="lm-time">{{created_by}}</time>
+    <time class="lm-time">{{ created_by }}</time>
   </div>
 `;
   }

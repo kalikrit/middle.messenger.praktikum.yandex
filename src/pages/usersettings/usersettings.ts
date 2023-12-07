@@ -20,7 +20,7 @@ class UserSettings extends Block {
   init():boolean {
     this.events = {
       submit: this.onSubmit.bind(this),
-      click: this.changeAvatar.bind(this),
+      // click: this.changeAvatar.bind(this),
     };
     return true;
   }
@@ -55,6 +55,7 @@ class UserSettings extends Block {
 
     const formData = new FormData(target);
     const formObject = Object.fromEntries(formData.entries());
+    formObject.id = this.props.state.id;
 
     if (validate) {
       await uctl.profile(formObject);
@@ -70,7 +71,6 @@ class UserSettings extends Block {
   render() {
     const { props } = this;
     const { error } = props.state;
-    const { user = {} } = props.state;
 
     return (`
     <div class="window">
@@ -78,10 +78,7 @@ class UserSettings extends Block {
         <div class="usersettings">
             <div>
             <div class="avatar">
-<img
- class='avatar'
- src='${user?.avatar ? `https://ya-praktikum.tech/api/v2/resources${user.avatar}` : '/ava.png'}'
- /> 
+              {{{ Avatar avatar=state.avatar}}}
             </div>
             </div>
             <div>{{state.first_name}}</div>
@@ -158,39 +155,16 @@ class UserSettings extends Block {
             error="${error?.phone || ''}"
         }}}
                 </div>
-                <div class="actions">
-                    <div>
+                <div class="actions row">
         {{{ Button
             type="submit"
             class="link-button"
             label="Изменить данные"
         }}}
-                    </div>
-                    <div><a href="#">Изменить пароль</a></div>
-                    <div class="row">
-                    <div>Старый пароль</div>
-        {{{ Field
-            id="oldPassword"
-            name="oldPassword"
-            type="password"
-            placeholder="Старый пароль"
-            value=state.oldPassword
-            onBlur=onBlur
-            error="${error?.oldPassword || ''}"
-        }}}
-                    </div>
-                    <div class="row">
-                    <div>Новый пароль</div>
-        {{{ Field
-            id="newPassword"
-            name="newPassword"
-            type="password"
-            placeholder="Новый пароль"
-            value=state.newPassword
-            onBlur=onBlur
-            error="${error?.newPassword || ''}"
-        }}}
-                    </div>
+        <a href="/changePassword" class="link-button">
+          Изменить пароль
+        </a>
+                  </div>
                     {{{ ButtonExit }}}
                     {{{ ButtonBack }}}
                 </div>                      

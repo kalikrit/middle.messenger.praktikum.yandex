@@ -21,25 +21,19 @@ const rules: Record<string, Record<string, any>> = {
 
   password: {
     [VALID_PASSWORD]: true,
-    [MIN_LENGTH]: 3,
-    [MAX_LENGTH]: 40,
-  },
-
-  password_again: {
-    [VALID_PASSWORD]: true,
-    [MIN_LENGTH]: 3,
+    [MIN_LENGTH]: 8,
     [MAX_LENGTH]: 40,
   },
 
   oldPassword: {
     [VALID_PASSWORD]: true,
-    [MIN_LENGTH]: 3,
+    [MIN_LENGTH]: 8,
     [MAX_LENGTH]: 40,
   },
 
   newPassword: {
     [VALID_PASSWORD]: true,
-    [MIN_LENGTH]: 3,
+    [MIN_LENGTH]: 8,
     [MAX_LENGTH]: 40,
   },
 

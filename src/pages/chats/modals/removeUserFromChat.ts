@@ -1,12 +1,17 @@
 import Block from '../../../utils/Block';
 import ChatsController from '../../../controller/ChatsController';
 import connect from '../../../utils/Connect';
-import { Indexed } from '../../../types/types';
+import { Indexed, User } from '../../../types/types';
 
-class AddUser2Chat extends Block {
+class RemoveUserFromChat extends Block {
+  protected initial = {
+    message: '',
+    error: {},
+  };
+
   constructor(props: Record<string, any>) {
     super({
-      componentName: 'AddUser2Chat',
+      componentName: 'RemoveUserFromChat',
       addUser: (e: Event) => {
         const target = e.target as HTMLElement;
         const { activeChatId } = props.state;
@@ -16,6 +21,9 @@ class AddUser2Chat extends Block {
       },
       ...props,
     });
+
+    this.setProps(this.initial);
+    console.log('STATE', props.state);
   }
 
   componentDidUpdate(): boolean {
@@ -27,34 +35,32 @@ class AddUser2Chat extends Block {
 
   render() {
     const { props } = this;
-    const { error } = props.state;
+    const { users = [] } = props.state;
 
     return (`
 <div class="window">
   <div class="card">
-  <h2>Введите имя пользователя</h2> 
-  <form action="#" name="comment" class="row row_nowrap row_gap-sm" style="width: 100%">
-      <div class="textarea corner">
-      {{{ Field 
-          name="title"
-          class=""
-          value=""
-          error="${error?.message || ''}"
-          onInput=onInput
-          }}}
-      </div>
-  </form>
- {{{ UserList activeChatId=activeChatId }}}
+    <h2>Удалить пользователя из чата</h2>
+    <ul>
+    ${users.length ? users.map((user: User) => `
+        <li>
+        {{{ Button
+          class="button"
+          label="${user.login}" 
+          onClick=addUser 
+          data-id="${user.id}"
+        }}}
+        </li>`).join('') : ''}
+    </ul> 
   </div>
 </div>
   `);
   }
 }
 
-const mapStateToProps = (state: Indexed): Indexed => <Indexed>({
+const mapStateToProps = (state: Indexed) => ({
   users: state.users,
-  user: state.user,
   activeChatId: state.activeChatId,
 });
 
-export default connect(mapStateToProps)(AddUser2Chat);
+export default connect(mapStateToProps)(RemoveUserFromChat);

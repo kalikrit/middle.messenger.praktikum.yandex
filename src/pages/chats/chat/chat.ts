@@ -40,33 +40,30 @@ class Chat extends Block {
     }
 
     return (`
-${!state.activeChatId
-        ? `
-    <div class="chat_greet">Выберите чат для начала общения</div>
-    `
-        : `
-  <div class="dialog chat__dialog">
-    <div class="main_chat">
-    <div class="row  row_gap  row_middle ">
-    <img
-    class='avatar avatar_small' 
-    src='${user?.avatar ? `https://ya-praktikum.tech/api/v2/resources${user.avatar}` : '/public/vite.svg'}' />
-    <h4>{{ state.user.first_name }}</h4>
-  </div>
+${!state.activeChatId ? `
+<div class="chat_greet">Выберите чат для начала общения</div>
+` : `
+<div class="dialog chat__dialog">
+  <div class="main_chat">
+  <div class="row  row_gap  row_middle ">
+  <img
+  class='avatar' 
+  src='${user?.avatar ? `https://ya-praktikum.tech/api/v2/resources${user.avatar}` : '/public/vite.svg'}' />
+  <h4>{{ state.user.first_name }}</h4>
+</div>
 ${messages?.map((item) => (`
-  <div class="row">
-    <div class="${item.author ? 'chat-message sent' : 'chat-message receive'}">
-      ${item.content}
-    </div>
-    <div class="lm-time">${item.time}</div>
+<div class="row">
+  <div class="${item.author ? 'chat-message sent' : 'chat-message receive'}">
+    ${item.content}
   </div>
+  <div class="lm-time">${item.time}</div>
+</div>
 `)).join(' ')}
-  </div>
-  <div class="message">
-      {{{ FormMessage }}}
-  </div>
-  </div>`}
-    `);
+</div>
+<div class="message">
+    {{{ FormMessage }}}
+</div>
+</div>`}`);
   }
 }
 

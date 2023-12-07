@@ -206,8 +206,13 @@ a {
   font-size: 20px;
 }
 .chat_greet {
-  margin-top: 2rem;
-  margin-left: 2rem;
+  position: absolute;
+  top: 8%;
+  left: 150%;
+  font-size: x-large;
+  width: max-content;
+  color: green;
+  font-weight: 700;
 }
 .message {
   position:absolute;
@@ -254,6 +259,10 @@ a {
   background-color: #dddada;
   border-radius: 50%;
   display: inline-block;
+
+  &__settings {
+    cursor: pointer;
+  }
 }
 .row {
   display: flex;

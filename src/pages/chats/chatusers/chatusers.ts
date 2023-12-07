@@ -31,11 +31,13 @@ class ChatUsers extends Block {
 }
 
 const formatChats = function formatChats(chats: any[], chatId: string | null) {
-  return chats.map((chat: Record<string, any>) => ({
+  const result = chats.map((chat: Record<string, any>) => ({
     ...chat,
+    avatar: chat.avatar || '/noimage.png',
     active: chat.id === chatId,
     created_by: formatTime(chat.created_by),
   }));
+  return result;
 };
 
 const mapChatToProps = (state: Indexed) => {

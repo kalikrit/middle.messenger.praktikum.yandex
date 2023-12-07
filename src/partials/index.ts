@@ -6,6 +6,7 @@ export { ButtonExit } from './buttonExit';
 export { Input } from './input';
 export { Version } from './version';
 
-export { Modal } from './modal/index';
+export { Avatar } from './avatar';
 export { AppendChatModal } from '../pages/chats/modals';
 export { AddUser2Chat } from '../pages/chats/modals';
+export { UserList } from '../pages/chats/modals';

@@ -1,7 +1,7 @@
 import Block from '../../../utils/Block';
 import ChatsController from '../../../controller/ChatsController';
 import connect from '../../../utils/Connect';
-import { Indexed, User } from '../../../types/types';
+import { Indexed } from '../../../types/types';
 
 class RemoveUserFromChat extends Block {
   protected initial = {
@@ -12,55 +12,38 @@ class RemoveUserFromChat extends Block {
   constructor(props: Record<string, any>) {
     super({
       componentName: 'RemoveUserFromChat',
-      addUser: (e: Event) => {
+      removeUser: (e: Event) => {
         const target = e.target as HTMLElement;
         const { activeChatId } = props.state;
         const userId: string = target.dataset.id || '';
-
-        ChatsController.appendUser([userId], activeChatId);
+        ChatsController.removeUser([userId], activeChatId);
+        this.router.go('');
       },
       ...props,
     });
-
-    this.setProps(this.initial);
-    console.log('STATE', props.state);
-  }
-
-  componentDidUpdate(): boolean {
-    const { state } = this.props;
-    /* eslint no-console: 0 */
-    console.log(state);
-    return true;
   }
 
   render() {
-    const { props } = this;
-    const { users = [] } = props.state;
-
     return (`
 <div class="window">
   <div class="card">
     <h2>Удалить пользователя из чата</h2>
-    <ul>
-    ${users.length ? users.map((user: User) => `
-        <li>
-        {{{ Button
-          class="button"
-          label="${user.login}" 
-          onClick=addUser 
-          data-id="${user.id}"
-        }}}
-        </li>`).join('') : ''}
-    </ul> 
+      {{{ Button 
+        class="button__orange"
+        label="konst"
+        onClick=removeUser
+        data-id="1348797"
+      }}}
+    {{{ ButtonBack }}}
   </div>
-</div>
+</div>    
   `);
   }
 }
 
-const mapStateToProps = (state: Indexed) => ({
-  users: state.users,
+const mapUserToProps = (state: Indexed) => ({
   activeChatId: state.activeChatId,
+  chatUsers: state.chatUsers,
 });
 
-export default connect(mapStateToProps)(RemoveUserFromChat);
+export default connect(mapUserToProps)(RemoveUserFromChat);

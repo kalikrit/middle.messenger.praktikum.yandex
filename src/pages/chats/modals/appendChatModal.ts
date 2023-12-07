@@ -30,7 +30,7 @@ export default class AppendChatModal extends Block {
     const formData = new FormData(target);
     const formObject = Object.fromEntries(formData.entries());
     ChatsController.createChat(formObject);
-    this.router.go('chats');
+    this.router.go('');
   }
 
   componentDidUpdate(): boolean {

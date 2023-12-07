@@ -266,9 +266,7 @@ a {
 }
 .row {
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  gap: 14rem;
+  gap: 10rem;
   border-bottom: 1px solid #EAEAEA;
   margin: 10px 0;
   padding: 10px 0 0;
@@ -276,6 +274,9 @@ a {
 .row input {
   border: none;
 
+}
+.row button {
+  height: 40px !important;
 }
 .actions {
   margin-top: 3rem;

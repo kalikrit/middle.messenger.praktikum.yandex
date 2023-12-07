@@ -12,7 +12,7 @@ import AppendChatModal from './src/pages/chats/modals/appendChatModal';
 import AddUser2Chat from './src/pages/chats/modals/addUser2Chat';
 import RemoveUserFromChat from './src/pages/chats/modals/removeUserFromChat';
 import ChangeAvatar from './src/pages/chats/modals/changeAvatar';
-import ChangePassword from './src/pages/chats/modals/changePassword'
+import ChangePassword from './src/pages/chats/modals/changePassword';
 
 import Router from './src/utils/Router';
 import store, { StoreEvents } from './src/utils/Store';

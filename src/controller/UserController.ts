@@ -126,6 +126,17 @@ class UserController {
         console.error(`set user avatar error: ${error}`);
       });
   }
+
+  // search user by login
+  search(login: string) {
+    this.api.find(login).then((data: Record<string, any>) => {
+      if (data && data.status === 200) {
+        store.set('users', JSON.parse(data.response));
+      }
+    }).catch((error) => {
+      console.error(`Failed find user ${error}`);
+    });
+  }
 }
 
 export default UserController;

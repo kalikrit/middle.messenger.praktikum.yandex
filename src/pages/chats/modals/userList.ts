@@ -13,6 +13,13 @@ class UserList extends Block {
         const userId: string = target.dataset.id || '';
 
         ChatsController.appendUser([userId], activeChatId);
+        setTimeout(() => {
+          const usersEl: HTMLElement | any = document.getElementById('users');
+          usersEl.innerHTML = `
+          ПОЛЬЗОВАТЕЛЬ УСПЕШНО ДОБАВЛЕН 
+             В ВЫБРАННЫЙ ЧАТ
+          `;
+        }, 10);
       },
       ...props,
     });
@@ -23,10 +30,6 @@ class UserList extends Block {
   }
 
   componentDidUpdate(): boolean {
-    const { state } = this.props;
-    /* eslint no-console: 0 */
-    console.log('state', state);
-    console.log('this.props4', JSON.stringify(this.props));
     return true;
   }
 
@@ -35,11 +38,15 @@ class UserList extends Block {
     const { users = [] } = props.state;
 
     return (`
-<ul class="flat-list">
+<ul id="users">
     ${users.length ? users.map((user: User) => `
-        <li class="">
-        {{{ Button class="btn btn_full btn_plain" label="${user.login}" onClick=addUser data-id="${user.id}" }}}
-        </li>`).join('') : ''}
+    <li class="">
+    {{{ Button 
+      label="${user.login}" 
+      onClick=addUser 
+      data-id="${user.id}"
+    }}}
+    </li>`).join('') : ''}
 </ul>
 `);
   }

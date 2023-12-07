@@ -71,4 +71,12 @@ export default class ApiUser {
       { headers: {}, data, withCredentials: true },
     );
   }
+
+  // find user by login
+  find(login: string) {
+    return this.fetch.post(
+      `${this.baseUrl}/api/v2/user/search`,
+      { headers: this.headers, data: { login }, withCredentials: true },
+    );
+  }
 }

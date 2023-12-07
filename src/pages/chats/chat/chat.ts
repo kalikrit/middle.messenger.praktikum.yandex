@@ -45,11 +45,17 @@ ${!state.activeChatId ? `
 ` : `
 <div class="dialog chat__dialog">
   <div class="main_chat">
-  <div class="row  row_gap  row_middle ">
+  <div class="row">
   <img
   class='avatar' 
-  src='${user?.avatar ? `https://ya-praktikum.tech/api/v2/resources${user.avatar}` : '/public/vite.svg'}' />
+  src='${user?.avatar ? `https://ya-praktikum.tech/api/v2/resources${user.avatar}` : '/noimage.png'}' />
   <h4>{{ state.user.first_name }}</h4>
+  {{{ ButtonAddUser
+    activeChatId=state.activeChatId
+  }}}
+  {{{ ButtonRemoveUser
+    activeChatId=state.activeChatId
+  }}}
 </div>
 ${messages?.map((item) => (`
 <div class="row">

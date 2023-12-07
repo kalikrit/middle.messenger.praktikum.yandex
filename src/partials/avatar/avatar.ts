@@ -17,7 +17,7 @@ export default class Avatar extends Block {
   }
 
   render() {
-return (`
+    return (`
     <img
         class='avatar__settings'
         src='https://ya-praktikum.tech/api/v2/resources{{ avatar }}'/>

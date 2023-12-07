@@ -1,10 +1,9 @@
 import Block from '../../../utils/Block';
 import ChatsController from '../../../controller/ChatsController';
 import connect from '../../../utils/Connect';
-import { Indexed, User } from '../../../types/types';
+import { Indexed } from '../../../types/types';
 
 class AddUser2Chat extends Block {
-
   constructor(props: Record<string, any>) {
     super({
       componentName: 'AddUser2Chat',
@@ -17,7 +16,6 @@ class AddUser2Chat extends Block {
       },
       ...props,
     });
-
   }
 
   componentDidUpdate(): boolean {

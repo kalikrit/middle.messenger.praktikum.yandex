@@ -4,37 +4,37 @@ import connect from '../../../utils/Connect';
 import { Indexed, User } from '../../../types/types';
 
 class UserList extends Block {
-    constructor(props: Record<string, any>) {
-      super({
-        componentName: 'userList',
-        addUser: (e: Event) => {
-          const target = e.target as HTMLElement;
-          const { activeChatId } = props.state;
-          const userId: string = target.dataset.id || '';
-  
-          ChatsController.appendUser([userId], activeChatId);
-        },
-        ...props,
-      });
-    }
-  
-    init(): boolean {
-      return true;
-    }
-  
-    componentDidUpdate(): boolean {
-      const { state } = this.props;
-      /* eslint no-console: 0 */
-      console.log('state', state);
-      console.log('this.props4', JSON.stringify(this.props));
-      return true;
-    }
-  
-    render() {
-      const { props } = this;
-      const { users = [] } = props.state;
-  
-return (`
+  constructor(props: Record<string, any>) {
+    super({
+      componentName: 'userList',
+      addUser: (e: Event) => {
+        const target = e.target as HTMLElement;
+        const { activeChatId } = props.state;
+        const userId: string = target.dataset.id || '';
+
+        ChatsController.appendUser([userId], activeChatId);
+      },
+      ...props,
+    });
+  }
+
+  init(): boolean {
+    return true;
+  }
+
+  componentDidUpdate(): boolean {
+    const { state } = this.props;
+    /* eslint no-console: 0 */
+    console.log('state', state);
+    console.log('this.props4', JSON.stringify(this.props));
+    return true;
+  }
+
+  render() {
+    const { props } = this;
+    const { users = [] } = props.state;
+
+    return (`
 <ul class="flat-list">
     ${users.length ? users.map((user: User) => `
         <li class="">
@@ -42,13 +42,12 @@ return (`
         </li>`).join('') : ''}
 </ul>
 `);
-    }
   }
-  
-  const mapStateToProps = (state: Indexed) => ({
-    users: state.users,
-    activeChatId: state.activeChatId,
-  });
-  
-  export default connect(mapStateToProps)(UserList);
-  
+}
+
+const mapStateToProps = (state: Indexed) => ({
+  users: state.users,
+  activeChatId: state.activeChatId,
+});
+
+export default connect(mapStateToProps)(UserList);

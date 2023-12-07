@@ -23,9 +23,9 @@ export default class ChangeAvatar extends Block {
     const { target } = event;
     const formData = new FormData(target);
     const formObject = Object.fromEntries(formData.entries());
-    const obj: any = formObject['avatar'];
-    console.log(obj.size)
-    // если передан файл. Проверяем по размеру. 
+    const obj: any = formObject.avatar;
+    console.log(obj.size);
+    // если передан файл. Проверяем по размеру.
     // 5000 - минимальный размер jpg картинки 100х100
     if (obj.size >= 5000) {
       uctl.avatar(formData);

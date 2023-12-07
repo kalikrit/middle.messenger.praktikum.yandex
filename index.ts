@@ -10,7 +10,9 @@ import UnAuth from './src/pages/errors/unauth';
 import IndexPage from './src/pages/indexpage/index';
 import AppendChatModal from './src/pages/chats/modals/appendChatModal';
 import AddUser2Chat from './src/pages/chats/modals/addUser2Chat';
+import RemoveUserFromChat from './src/pages/chats/modals/removeUserFromChat';
 import ChangeAvatar from './src/pages/chats/modals/changeAvatar';
+import ChangePassword from './src/pages/chats/modals/changePassword'
 
 import Router from './src/utils/Router';
 import store, { StoreEvents } from './src/utils/Store';
@@ -41,7 +43,9 @@ store.on(StoreEvents.Updated, (prop) => {
       router.use('settings', UserSettings);
       router.use('createChat', AppendChatModal);
       router.use('addUser', AddUser2Chat);
+      router.use('removeUser', RemoveUserFromChat);
       router.use('changeAvatar', ChangeAvatar);
+      router.use('changePassword', ChangePassword);
 
       userController.getUser();
     } else {

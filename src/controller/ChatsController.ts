@@ -87,7 +87,7 @@ class ChatsController {
     const socket = this.api.getChat(user?.id, activeChatId, token);
 
     socket.addEventListener('open', () => {
-      console.log('Соединение установлено');
+      console.log('соединение установлено');
 
       this.getMessages(socket);
       this.getUsers(activeChatId);
@@ -96,18 +96,18 @@ class ChatsController {
     socket.addEventListener('close', (event) => {
       if (event.wasClean) {
         /* eslint no-console: 0 */
-        console.log('Соединение закрыто чисто');
+        console.log('соединение закрыто чисто');
       } else {
         /* eslint no-console: 0 */
-        console.log('Обрыв соединения');
+        console.log('сединение оборвано');
       }
       /* eslint no-console: 0 */
-      console.log(`Код: ${event.code} | Причина: ${event.reason}`);
+      console.log(`code: ${event.code} | reason: ${event.reason}`);
     });
 
     socket.addEventListener('message', (event) => {
       /* eslint no-console: 0 */
-      console.log('Получены данные', event.data);
+      console.log('данные из сокета:', event.data);
       try {
         const data = JSON.parse(event.data);
 

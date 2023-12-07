@@ -4,10 +4,6 @@ import connect from '../../../utils/Connect';
 import { Indexed, User } from '../../../types/types';
 
 class AddUser2Chat extends Block {
-  protected initial = {
-    message: '',
-    error: {},
-  };
 
   constructor(props: Record<string, any>) {
     super({
@@ -22,8 +18,6 @@ class AddUser2Chat extends Block {
       ...props,
     });
 
-    this.setProps(this.initial);
-    console.log('STATE', props.state);
   }
 
   componentDidUpdate(): boolean {
@@ -35,31 +29,33 @@ class AddUser2Chat extends Block {
 
   render() {
     const { props } = this;
-    const { users = [] } = props.state;
+    const { error } = props.state;
 
     return (`
 <div class="window">
   <div class="card">
-    <h2>Добавить пользователя к чату</h2>
-    <ul>
-    ${users.length ? users.map((user: User) => `
-        <li>
-        {{{ Button
-          class="button"
-          label="${user.login}" 
-          onClick=addUser 
-          data-id="${user.id}"
-        }}}
-        </li>`).join('') : ''}
-    </ul> 
+  <h2>Введите имя пользователя</h2> 
+  <form action="#" name="comment" class="row row_nowrap row_gap-sm" style="width: 100%">
+      <div class="textarea corner">
+      {{{ Field 
+          name="title"
+          class=""
+          value=""
+          error="${error?.message || ''}"
+          onInput=onInput
+          }}}
+      </div>
+  </form>
+ {{{ UserList activeChatId=activeChatId }}}
   </div>
 </div>
   `);
   }
 }
 
-const mapStateToProps = (state: Indexed) => ({
+const mapStateToProps = (state: Indexed): Indexed => <Indexed>({
   users: state.users,
+  user: state.user,
   activeChatId: state.activeChatId,
 });
 

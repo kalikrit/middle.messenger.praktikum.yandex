@@ -28,7 +28,8 @@ export default class ChatUser extends Block {
 
   render() {
     const { props } = this;
-    const { avatar } = props;
+    console.log('from chatUser:', props)
+    // const { avatar } = props;
     return `
   <div>
     <img class='avatar__settings'

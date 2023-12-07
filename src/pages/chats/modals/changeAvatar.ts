@@ -23,15 +23,19 @@ export default class ChangeAvatar extends Block {
     const { target } = event;
     const formData = new FormData(target);
     const formObject = Object.fromEntries(formData.entries());
-    if (formObject.avatar?.size) {
+    const obj: any = formObject['avatar'];
+    console.log(obj.size)
+    // если передан файл. Проверяем по размеру. 
+    // 5000 - минимальный размер jpg картинки 100х100
+    if (obj.size >= 5000) {
       uctl.avatar(formData);
       this.router.go('usettings');
     }
   }
 
   render() {
-    const { props } = this;
-    const { avatar } = props.state;
+    // const { props } = this;
+    // const { avatar } = props.state;
 
     return (`
 <div class="window">

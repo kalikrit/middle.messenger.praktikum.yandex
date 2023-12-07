@@ -70,7 +70,7 @@ class UserSettings extends Block {
 
   render() {
     const { props } = this;
-    const { error, avatar } = props.state;
+    const { error } = props.state;
 
     return (`
     <div class="window">
@@ -78,10 +78,7 @@ class UserSettings extends Block {
         <div class="usersettings">
             <div>
             <div class="avatar">
-<img
- class='avatar__settings'
- src='${avatar ? `https://ya-praktikum.tech/api/v2/resources${avatar}` : '/noimage.png'}'
- /> 
+              {{{ Avatar avatar=state.avatar}}}
             </div>
             </div>
             <div>{{state.first_name}}</div>
@@ -158,15 +155,16 @@ class UserSettings extends Block {
             error="${error?.phone || ''}"
         }}}
                 </div>
-                <div class="actions">
-                    <div>
+                <div class="actions row">
         {{{ Button
             type="submit"
             class="link-button"
             label="Изменить данные"
         }}}
-                    </div>
-                    </div>
+        <a href="/changePassword" class="link-button">
+          Изменить пароль
+        </a>
+                  </div>
                     {{{ ButtonExit }}}
                     {{{ ButtonBack }}}
                 </div>                      

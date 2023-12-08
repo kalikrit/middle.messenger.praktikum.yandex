@@ -55,8 +55,8 @@ export default class ChangeAvatar extends Block {
       class="button"
       label="Загрузить"
     }}}
-    {{{ ButtonBack }}}
   </form>
+  {{{ ButtonBack }}}
 </div>
 </div>
 `);

@@ -30,7 +30,10 @@ export default class AppendChatModal extends Block {
     const formData = new FormData(target);
     const formObject = Object.fromEntries(formData.entries());
     ChatsController.createChat(formObject);
-    this.router.go('');
+    setTimeout(() => {
+      const messageEl: HTMLElement | any = document.getElementById('message');
+      messageEl.textContent = 'ЧАТ УСПЕШНО СОЗДАН';
+    }, 10);
   }
 
   componentDidUpdate(): boolean {
@@ -64,8 +67,9 @@ export default class AppendChatModal extends Block {
       class="button"
       label="Создать"
     }}}
-    {{{ ButtonBack }}}
 </form>
+<div id="message"></div>
+{{{ ButtonBack }}}
 </div>
 </div>
   `);

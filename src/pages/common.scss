@@ -261,6 +261,8 @@ a {
   display: inline-block;
 
   &__settings {
+    max-width: 200px;
+    max-height: 200px;
     cursor: pointer;
   }
 }
@@ -271,9 +273,9 @@ a {
   margin: 10px 0;
   padding: 10px 0 0;
 }
+.row h4 { color: darkgreen;}
 .row input {
   border: none;
-
 }
 .row button {
   height: 40px !important;

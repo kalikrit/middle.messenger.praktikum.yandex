@@ -28,8 +28,8 @@ class Chats extends Block {
       ...props,
 
     }, { ChatUsers, Chat });
-
-    this.setProps(this.initial);
+    const id: string | undefined = window.location.search.split('=')[1];
+    if (id) this.setActiveChat(id);
   }
 
   async setActiveChat(id: string) {

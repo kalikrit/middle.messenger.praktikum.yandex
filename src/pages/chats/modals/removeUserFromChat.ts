@@ -17,7 +17,11 @@ class RemoveUserFromChat extends Block {
         const { activeChatId } = props.state;
         const userId: string = target.dataset.id || '';
         ChatsController.removeUser([userId], activeChatId);
-        this.router.go('');
+        setTimeout(() => {
+          const messageEl: HTMLElement | any = document.getElementById('message');
+          messageEl.textContent = `
+          ПОЛЬЗОВАТЕЛЬ УДАЛЕН ИЗ ВЫБРАННОГО ЧАТА`;
+        }, 10);
       },
       ...props,
     });
@@ -34,7 +38,8 @@ class RemoveUserFromChat extends Block {
         onClick=removeUser
         data-id="1348797"
       }}}
-    {{{ ButtonBack }}}
+      <div id="message"></div>
+      {{{ ButtonBack }}}
   </div>
 </div>    
   `);

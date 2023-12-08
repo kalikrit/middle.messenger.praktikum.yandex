@@ -6,24 +6,17 @@ export default class ButtonBack extends Block {
   }
 
   init() {
-    this.events = {
-      click: this.onClick.bind(this),
-    };
     return true;
-  }
-
-  onClick() {
-    this.router.go('messenger');
   }
 
   render() {
     return (`
-{{{Button
-    type="button"
-    name="button"
-    label="Назад"
-    class="button__gray"
-}}}
+<button
+ class="button__gray"
+ onclick="window.location.href = 'messenger?id=37566';"
+ >
+ Назад
+ </button>
     `);
   }
 }

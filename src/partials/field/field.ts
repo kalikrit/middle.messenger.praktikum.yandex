@@ -1,17 +1,15 @@
 import Block from '../../utils/Block';
 
 export default class Field extends Block {
-  
   constructor(props: Array<Record<string, any>>) {
     super({ componentName: 'Field', ...props });
   }
 
   render() {
     return (`
-<div class="input">
+<div class="{{ class }}">
       <label
-       for="{{ name }}"
-       class="label label_toggle">
+       for="{{ name }}">
          {{ label }}
       </label>
     {{{ Input

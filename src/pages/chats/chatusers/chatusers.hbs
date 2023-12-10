@@ -1,0 +1,16 @@
+<div>
+    {{#each state.contacts  }}
+        <div class="chat{{#if active}} active {{/if}}">
+        {{{ ChatUser
+            id=id
+            active=active
+            title=title
+            unread=unread
+            last_message=last_message
+            created_by=created_by
+            avatar=avatar
+            onClick=../setActive
+        }}}
+        </div>
+    {{/each}}
+</div>

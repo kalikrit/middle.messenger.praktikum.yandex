@@ -1,43 +1,70 @@
-import Block from './src/utils/Block'
-import * as partials from './src/partials'
-import { register } from './src/utils/Template'
-import LoginForm from './src/pages/login/login'
-import RegistrationForm from './src/pages/registration/registration'
-import ChatList from './src/pages/chatlist/chatlist'
-import UserSettings from './src/pages/usersettings/usersettings'
-import Error404 from './src/pages/errors/404'
-import Error500 from './src/pages/errors/500'
-import IndexPage from './src/pages/indexpage/index'
+import Block from './src/utils/Block';
+import * as partials from './src/partials';
+import { register } from './src/utils/Template';
+import LoginForm from './src/pages/login/login';
+import RegistrationForm from './src/pages/registration/registration';
+import Chats from './src/partials/chats/index';
+import UserSettings from './src/pages/usersettings/usersettings';
+import Error404 from './src/pages/errors/404';
+import UnAuth from './src/pages/errors/unauth';
+import IndexPage from './src/pages/indexpage/index';
+import AppendChatModal from './src/pages/chats/modals/appendChatModal';
+import AddUserToChat from './src/pages/chats/modals/addUserToChat';
+import RemoveUserFromChat from './src/pages/chats/modals/removeUserFromChat';
+import ChangeAvatar from './src/pages/chats/modals/changeAvatar';
+import ChangePassword from './src/pages/chats/modals/changePassword';
 
-import './src/pages/common.scss'
+import Router from './src/utils/Router';
+import store, { StoreEvents } from './src/utils/Store';
+import UserController from './src/controller/UserController';
 
-Object.entries(partials).forEach((partial) => register(partial))
+import './src/pages/common.scss';
 
-const Login = new LoginForm()
-const Registration = new RegistrationForm()
-const E404 = new Error404()
-const E500 = new Error500()
-const Chats = new ChatList()
-const USettings = new UserSettings()
-const Index = new IndexPage()
+Object.entries(partials)
+  .forEach((partial) => register(partial));
 
-
-const urlParams = new URLSearchParams(window.location.search)
-const page: string | null = urlParams.get('page')
-
-const pages: Record<string, Block> = {
-  login: Login,
-  register: Registration,
-  e404: E404,
-  e500: E500,
-  chats: Chats,
-  uset: USettings
-};
 const main = document.querySelector('#main') || document.createElement('div');
+const router = new Router(main);
+const userController = new UserController();
+const auth = window.localStorage.getItem('auth');
 
-if (page) {
-  const node = pages[page].getNode();
-  main.append(node);
-} else {
-  main.append(Index.getNode());
-}
+store.on(StoreEvents.Updated, (prop) => {
+  const state: Record<string, any> = store.getState();
+  const location = window.location.pathname.slice(1);
+
+  if (prop === 'auth') {
+    if (Router.instance) {
+      router.routes = [];
+    }
+
+    if (state.auth) {
+      router.redirect('', 'messenger');
+      router.use('messenger', Chats);
+      router.use('settings', UserSettings);
+      router.use('createChat', AppendChatModal);
+      router.use('addUser', AddUserToChat);
+      router.use('removeUser', RemoveUserFromChat);
+      router.use('changeAvatar', ChangeAvatar);
+      router.use('changePassword', ChangePassword);
+
+      userController.getUser();
+    } else {
+      router.redirect('', 'login');
+      router.use('login', LoginForm);
+      router.use('sign-up', RegistrationForm);
+    }
+
+    router.error('401', UnAuth);
+    // router.error('404', Error404);
+  }
+
+  if (router._currentRoute && !router.getRoute(location)) {
+    router.go('');
+  }
+
+  if (!router._currentRoute) {
+    router.start();
+  }
+});
+
+store.set('auth', auth && JSON.parse(auth));

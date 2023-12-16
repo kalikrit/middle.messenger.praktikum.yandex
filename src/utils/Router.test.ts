@@ -17,7 +17,7 @@ describe('Router', () => {
     router = new Router(main);
   });
 
-  it('new router instance should return the same instance', () => {
+  it('should router to be singleton', () => {
     const newRouter = new Router(main);
     expect(newRouter).to.eq(router);
   });
@@ -32,5 +32,12 @@ describe('Router', () => {
     router.start();
     router.go('');
     expect(window.location.pathname).to.eq('/login');
+  });
+
+  it('should get use page', () => {
+    const spy = sinon.spy(router, 'go');
+    router.use('/page', FakeComponent);
+    router.go('/page');
+    expect(spy.calledOnceWith('/page')).to.be.true;
   });
 });

@@ -36,7 +36,7 @@ describe('Router', () => {
 
   it('should get use page', () => {
     const spy = sinon.spy(router, 'go');
-    router.use('/page', FakeComponent);
+    router.use('/page', FakeBlock);
     router.go('/page');
     expect(spy.calledOnceWith('/page')).to.be.true;
   });

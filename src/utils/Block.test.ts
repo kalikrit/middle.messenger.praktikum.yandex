@@ -18,4 +18,13 @@ describe('Block', () => {
     const { state } = block.props;
     expect(state).to.have.property('test', 'test');
   });
+
+  it('should update event on set props', () => {
+    const spy = sinon.spy(block, '_componentDidMount');
+    block.setProps({
+      prop: 'new',
+    });
+
+    expect(spy.calledOnce).to.be.true;
+  });
 });

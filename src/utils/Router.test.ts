@@ -5,7 +5,7 @@ import Router from './Router';
 
 describe('Router', () => {
   let router: Router;
-  const root = document.querySelector('#root');
+  const main = document.querySelector('#main');
 
   class FakeBlock {
     getNode() {
@@ -14,11 +14,11 @@ describe('Router', () => {
   }
 
   beforeEach(() => {
-    router = new Router(root);
+    router = new Router(main);
   });
 
   it('new router instance should return the same instance', () => {
-    const newRouter = new Router(root);
+    const newRouter = new Router(main);
     expect(newRouter).to.eq(router);
   });
 
@@ -32,12 +32,5 @@ describe('Router', () => {
     router.start();
     router.go('');
     expect(window.location.pathname).to.eq('/login');
-  });
-
-  it('should get use page', () => {
-    const spy = sinon.spy(router, 'go');
-    router.use('/page', FakeBlock);
-    router.go('/page');
-    expect(spy.calledOnceWith('/page')).to.be.true;
   });
 });

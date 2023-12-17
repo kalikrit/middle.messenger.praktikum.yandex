@@ -27,13 +27,14 @@ export default class ChatUser extends Block {
   }
 
   render() {
-    // const { props } = this;
+    const { props } = this;
     // console.log('from chatUser:', props);
     // const { avatar } = props;
     return `
   <div>
     <img class='avatar__settings'
-    src='{{ avatar }}' style="border-radius: 50%; height: 50px"
+      src='${props.avatar ? `https://ya-praktikum.tech/api/v2/resources${this.props.avatar}` : '/noimage.png'}'
+      style="border-radius: 50%; height: 50px"
     />     
     <div class="user">
     {{ title }}

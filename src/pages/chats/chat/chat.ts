@@ -48,7 +48,7 @@ ${!state.activeChatId ? `
   <div class="row">
   <img
   class='avatar' 
-  src='${user?.avatar ? `https://ya-praktikum.tech/api/v2/resources${user.avatar}` : '/noimage.png'}' />
+  src='${user?.avatar ? `https://ya-praktikum.tech/api/v2/resources${user.avatar}` : '/nouserimage.png'}' />
   <h4>{{ state.user.first_name }}</h4>
   {{{ ButtonAddUser
     activeChatId=state.activeChatId

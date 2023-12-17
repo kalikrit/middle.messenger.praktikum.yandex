@@ -33,7 +33,7 @@ export default class ChatUser extends Block {
     return `
   <div>
     <img class='avatar__settings'
-      src='${props.avatar ? `https://ya-praktikum.tech/api/v2/resources${this.props.avatar}` : '/noimage.png'}'
+      src='${props.avatar ? `https://ya-praktikum.tech/api/v2/resources${this.props.avatar}` : '/nochatimage.png'}'
       style="border-radius: 50%; height: 50px"
     />     
     <div class="user">
